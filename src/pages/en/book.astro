@@ -1,0 +1,81 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import Footer from '../../components/Footer.astro';
+import { useTranslations } from '../../i18n';
+
+const lang = 'en' as const;
+const t = useTranslations(lang);
+
+const platforms = [
+  {
+    name: 'Airbnb',
+    label: t('book.airbnb_label'),
+    href: 'https://www.airbnb.fr/rooms/1220166769977468167',
+    bg: 'bg-[#FF385C]',
+  },
+  {
+    name: 'Le Bon Coin',
+    label: t('book.lbc_label'),
+    href: 'https://www.leboncoin.fr/ad/locations_saisonnieres/2027907352',
+    bg: 'bg-[#F56B2A]',
+  },
+];
+---
+<Base
+  lang={lang}
+  title="Book your stay — Étoile de la Mer, Cap d'Agde"
+  description="Book your stay at Étoile de la Mer in Cap d'Agde. Contact us directly or book via Airbnb and Le Bon Coin."
+>
+  <Nav lang={lang} currentUrl={Astro.url} />
+  <main class="pt-16">
+    <div class="bg-mer-dark text-white py-16 px-4">
+      <div class="max-w-6xl mx-auto">
+        <h1 class="font-display text-5xl font-bold mb-3">{t('book.title')}</h1>
+        <p class="text-white/65 max-w-xl leading-relaxed">{t('book.direct_intro')}</p>
+      </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
+
+        <div class="lg:col-span-2 space-y-12">
+          <div>
+            <h2 class="font-display text-2xl text-dusk mb-4">{t('book.conditions_title')}</h2>
+            <div class="bg-ecume rounded-2xl p-6 text-sm text-dusk/60 italic leading-relaxed">
+              {t('book.conditions_placeholder')}
+            </div>
+          </div>
+
+          <ContactForm lang={lang} />
+        </div>
+
+        <aside>
+          <h2 class="font-display text-2xl text-dusk mb-2">{t('book.platforms_title')}</h2>
+          <p class="text-xs text-dusk/50 mb-6 leading-relaxed">{t('book.direct_note')}</p>
+          <div class="space-y-4">
+            {platforms.map(p => (
+              <a
+                href={p.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class={`flex items-center justify-between ${p.bg} text-white rounded-2xl px-6 py-5 shadow-md hover:scale-[1.02] transition-transform duration-200`}
+              >
+                <div>
+                  <p class="font-semibold text-base">{p.name}</p>
+                  <p class="text-xs text-white/75 mt-0.5">{p.label}</p>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white/70 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            ))}
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </main>
+  <Footer lang={lang} />
+</Base>

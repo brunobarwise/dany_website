@@ -1,0 +1,27 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Hero from '../../components/Hero.astro';
+import Gallery from '../../components/Gallery.astro';
+import Amenities from '../../components/Amenities.astro';
+import Map from '../../components/Map.astro';
+import Reviews from '../../components/Reviews.astro';
+import Footer from '../../components/Footer.astro';
+
+const lang = 'en' as const;
+---
+<Base
+  lang={lang}
+  title="Étoile de la Mer — Holiday rental in Cap d'Agde"
+  description="2-star classified 2-room apartment in Cap d'Agde. Covered terrace, private parking, beach 15 min on foot. Up to 4 guests. Book direct."
+>
+  <Nav lang={lang} currentUrl={Astro.url} />
+  <main class="pt-16">
+    <Hero lang={lang} />
+    <Gallery lang={lang} />
+    <Amenities lang={lang} />
+    <Map lang={lang} />
+    <Reviews lang={lang} />
+  </main>
+  <Footer lang={lang} />
+</Base>

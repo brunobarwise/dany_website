@@ -1,0 +1,20 @@
+---
+import type { Lang } from '../i18n';
+import { useTranslations } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+<footer class="bg-mer-dark text-white/60 py-10 px-4">
+  <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
+    <div>
+      <span class="font-display font-semibold text-white text-lg">Étoile de la Mer</span>
+      <p class="text-xs mt-1">{t('footer.address')}</p>
+    </div>
+    <p class="text-xs text-white/40">{t('footer.copyright')}</p>
+  </div>
+</footer>

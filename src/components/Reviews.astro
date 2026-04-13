@@ -1,0 +1,84 @@
+---
+import type { Lang } from '../i18n';
+import { useTranslations } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+/*
+  PLACEHOLDER reviews — replace with real testimonials once obtained.
+  Written consent required per reviewer before publishing.
+*/
+type Review = {
+  name: string;
+  stars: number;
+  text: { fr: string; en: string };
+  date: { fr: string; en: string };
+};
+
+const reviews: Review[] = [
+  {
+    name: 'Marie L.',
+    stars: 5,
+    text: {
+      fr: 'Appartement très coquet, bien situé, à deux pas de la plage. Terrasse agréable et logement très propre.',
+      en: 'Very charming apartment, well located, steps from the beach. Lovely terrace and spotlessly clean.',
+    },
+    date: { fr: 'Août 2024', en: 'August 2024' },
+  },
+  {
+    name: 'Thomas & Julie',
+    stars: 5,
+    text: {
+      fr: 'Séjour parfait en famille. Les enfants ont adoré la cabine avec les lits superposés. On reviendra !',
+      en: 'Perfect family holiday. The kids loved the cabin with bunk beds. We will definitely be back!',
+    },
+    date: { fr: 'Juillet 2024', en: 'July 2024' },
+  },
+  {
+    name: 'Sophie M.',
+    stars: 5,
+    text: {
+      fr: 'Très bon rapport qualité-prix. Le parking dans la résidence sécurisée est un vrai plus. Quartier calme.',
+      en: 'Excellent value. The private parking in the secure residence is a real bonus. Quiet neighbourhood.',
+    },
+    date: { fr: 'Juin 2024', en: 'June 2024' },
+  },
+  {
+    name: 'Vanessa B.',
+    stars: 5,
+    text: {
+      fr: 'Au calme, parking super. Beau weekend entre farniente au port et visite du musée de l\'Éphèbe.',
+      en: 'Quiet neighbourhood, excellent parking. A lovely weekend spent relaxing at the harbour and visiting the Musée de l\'Éphèbe.',
+    },
+    date: { fr: 'Septembre 2025', en: 'Sept. 2025' },
+  },
+];
+---
+<section id="reviews" class="pt-10 pb-20 bg-white">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <h2 class="font-display text-4xl text-center text-dusk mb-12">{t('reviews.title')}</h2>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+      {reviews.map(r => (
+        <div class="bg-ecume rounded-2xl p-6 shadow-sm">
+          <div class="flex gap-1 mb-4">
+            {Array.from({ length: r.stars }).map(() => (
+              <svg class="w-4 h-4 text-sable" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.197-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.062 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69L9.049 2.927z" />
+              </svg>
+            ))}
+          </div>
+          <p class="text-dusk text-sm italic mb-4 leading-relaxed">"{r.text[lang]}"</p>
+          <p class="font-semibold text-mer text-sm">
+            {r.name}
+            <span class="text-dusk/40 font-normal"> · {r.date[lang]}</span>
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

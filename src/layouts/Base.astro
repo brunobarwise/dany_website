@@ -1,0 +1,44 @@
+---
+import type { Lang } from '../i18n';
+import { getAlternateUrl } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+  ogImage?: string;
+}
+
+const { lang, title, description, ogImage = '/images/hero.jpg' } = Astro.props;
+const siteUrl = 'https://location-etoiledelamer-capdagde.fr';
+const canonical = `${siteUrl}${Astro.url.pathname}`;
+const alternateLang: Lang = lang === 'fr' ? 'en' : 'fr';
+const alternateCanonical = `${siteUrl}${getAlternateUrl(Astro.url)}`;
+---
+<!doctype html>
+<html lang={lang} class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang={lang} href={canonical} />
+    <link rel="alternate" hreflang={alternateLang} href={alternateCanonical} />
+    <link rel="alternate" hreflang="x-default" href={`${siteUrl}/fr`} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${siteUrl}${ogImage}`} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="font-body bg-white text-dusk antialiased">
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,156 @@
+---
+import type { Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+/*
+  Zone center = geocoded real address (Nominatim / OSM).
+  A 500 m circle conveys the neighbourhood without revealing the exact building.
+  POI coordinates are for publicly known places — no privacy concern.
+*/
+const ZONE_LAT = 43.2836;
+const ZONE_LNG = 3.4973;
+const ZONE_RADIUS = 500;
+
+type Poi = {
+  lat: number;
+  lng: number;
+  icon: string;
+  label: { fr: string; en: string };
+};
+
+const pois: Poi[] = [
+  {
+    lat: 43.2762,
+    lng: 3.5149,
+    icon: '🏖️',
+    label: { fr: 'Plage Grande Conque', en: 'Grande Conque beach — 15 min walk' },
+  },
+  {
+    lat: 43.2741,
+    lng: 3.5032,
+    icon: '🏖️',
+    label: { fr: 'Plage Richelieu — 15 min à pied, 5 min en vélo', en: 'Plage Richelieu — 15 min walk, 5 min bike' },
+  },
+  {
+    lat: 43.2748,
+    lng: 3.4815,
+    icon: '🏖️',
+    label: { fr: 'Plage de Rochelongue', en: 'Plage de Rochelongue' },
+  },
+  {
+    lat: 43.2869,
+    lng: 3.5137,
+    icon: '🏛️',
+    label: { fr: "Musée de l'Éphèbe et d'archéologie sous-marine", en: "Musée de l'Éphèbe — underwater archaeology museum" },
+  },
+  {
+    lat: 43.2784,
+    lng: 3.5082,
+    icon: '⛵',
+    label: { fr: 'Port du Cap d\'Agde', en: 'Cap d\'Agde harbour' },
+  },
+  {
+    lat: 43.2795,
+    lng: 3.5074,
+    icon: '🍽️',
+    label: { fr: 'Restaurants & bars du port', en: 'Harbour restaurants & bars' },
+  },
+  {
+    lat: 43.2877,
+    lng: 3.4902,
+    icon: '⛳',
+    label: { fr: 'Golf du Cap d\'Agde', en: 'Cap d\'Agde Golf' },
+  },
+  {
+    lat: 43.2909,
+    lng: 3.5112,
+    icon: '🎾',
+    label: { fr: 'Tennis', en: 'Tennis' },
+  },
+  {
+    lat: 43.2870,
+    lng: 3.5030,
+    icon: '🥖',
+    label: { fr: 'Marché — samedi matin', en: 'Market — Saturday mornings' },
+  },
+  {
+    lat: 43.2855,
+    lng: 3.4958,
+    icon: '🛒',
+    label: { fr: 'Commerces & supermarchés', en: 'Shops & supermarkets' },
+  },
+  {
+    lat: 43.2960,
+    lng: 3.5020,
+    icon: '🚴',
+    label: { fr: 'Pistes cyclables', en: 'Cycling paths' },
+  },
+];
+
+const heading = lang === 'fr' ? 'Localisation' : 'Location';
+const subheading = lang === 'fr'
+  ? "Cap d'Agde, Hérault — à deux pas de la mer"
+  : "Cap d'Agde, Hérault — steps from the sea";
+const zoneLabel = lang === 'fr' ? "Quartier Étoile de la Mer" : "Étoile de la Mer area";
+---
+<section id="map" class="py-10 bg-ecume">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <h2 class="font-display text-4xl text-center text-dusk mb-3">{heading}</h2>
+    <p class="text-center text-dusk/55 text-sm mb-10">{subheading}</p>
+    <div id="leaflet-map" class="relative z-0 h-[480px] rounded-2xl overflow-hidden shadow-xl"></div>
+  </div>
+</section>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script is:inline src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script is:inline define:vars={{ ZONE_LAT, ZONE_LNG, ZONE_RADIUS, pois, zoneLabel, lang }}>
+  var map = L.map('leaflet-map', {
+    scrollWheelZoom: false,
+    zoomControl: true,
+  }).setView([ZONE_LAT, ZONE_LNG], 14);
+
+  L.tileLayer(
+    'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+    {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 19,
+    }
+  ).addTo(map);
+
+  L.circle([ZONE_LAT, ZONE_LNG], {
+    radius: ZONE_RADIUS,
+    color: '#0B3B6A',
+    fillColor: '#1EACB7',
+    fillOpacity: 0.20,
+    weight: 2.5,
+    opacity: 0.70,
+  }).addTo(map).bindPopup(zoneLabel);
+
+  pois.forEach(function (poi) {
+    var icon = L.divIcon({
+      className: '',
+      html:
+        '<div style="font-size:22px;line-height:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.35));">'
+        + poi.icon +
+        '</div>',
+      iconSize: [28, 28],
+      iconAnchor: [14, 14],
+      popupAnchor: [0, -16],
+    });
+
+    L.marker([poi.lat, poi.lng], { icon: icon })
+      .addTo(map)
+      .bindPopup(
+        '<span style="font-size:13px;font-family:system-ui,sans-serif;">'
+        + poi.label[lang] +
+        '</span>'
+      );
+  });
+</script>

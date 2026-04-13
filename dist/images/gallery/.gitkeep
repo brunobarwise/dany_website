@@ -1,0 +1,3 @@
+Drop gallery images here (WebP preferred, max 200 KB each, 8–16 photos).
+Name them sequentially: 01.jpg, 02.jpg, …
+Then uncomment and populate the images array in src/components/Gallery.astro.

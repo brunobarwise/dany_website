@@ -1,0 +1,51 @@
+---
+import type { Lang } from '../i18n';
+import { useTranslations } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const bookHref = lang === 'fr' ? '/fr/reserver' : '/en/book';
+---
+<section class="relative h-screen flex items-center justify-center overflow-hidden">
+  <!--
+    Hero image: uncomment and remove the gradient div once photos are available.
+    Recommended: 1920×1080 min, WebP format, landscape orientation.
+    <img
+      src="/images/hero.jpg"
+      alt="Vue de l'appartement Étoile de la Mer, Cap d'Agde"
+      class="absolute inset-0 w-full h-full object-cover"
+      loading="eager"
+      fetchpriority="high"
+    />
+  -->
+  <div class="absolute inset-0 bg-gradient-to-br from-mer-dark via-mer to-turquoise"></div>
+  <div class="absolute inset-0 bg-dusk/25"></div>
+
+  <div class="relative text-center text-white px-4 max-w-3xl mx-auto">
+    <p class="text-xs font-semibold tracking-widest uppercase text-turquoise mb-5">
+      Cap d'Agde · Hérault
+    </p>
+    <h1 class="font-display text-5xl md:text-7xl font-bold mb-6 drop-shadow-lg leading-tight">
+      Étoile de la Mer
+    </h1>
+    <p class="text-lg md:text-xl mb-10 text-white/80 drop-shadow leading-relaxed max-w-xl mx-auto">
+      {t('hero.tagline')}
+    </p>
+    <a
+      href={bookHref}
+      class="inline-block bg-sable hover:bg-sable-dark text-dusk font-semibold px-10 py-4 rounded-full transition-colors duration-200 shadow-lg text-sm tracking-wide"
+    >
+      {t('hero.cta')}
+    </a>
+  </div>
+
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-white/50">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </div>
+</section>
