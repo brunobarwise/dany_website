@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Hero from '../../components/Hero.astro';
 import Gallery from '../../components/Gallery.astro';
+import GalleryModal from '../../components/GalleryModal.astro';
 import Amenities from '../../components/Amenities.astro';
 import Map from '../../components/Map.astro';
 import Reviews from '../../components/Reviews.astro';
@@ -23,5 +24,6 @@ const lang = 'fr' as const;
     <Map lang={lang} />
     <Reviews lang={lang} />
   </main>
+  <GalleryModal lang={lang} />
   <Footer lang={lang} />
 </Base>

@@ -1,0 +1,214 @@
+---
+import type { Lang } from '../i18n';
+import { images, sections } from '../data/gallery';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const GRID_SECTIONS = ['sejour', 'cuisine-entree', 'loggia', 'chambre', 'cuisine', 'residence', 'commerces'];
+const FULL_SECTIONS  = ['port', 'plages'];
+
+const grouped = sections
+  .map(s => ({
+    key: s.key,
+    label: s[lang],
+    images: images
+      .map((img, i) => ({ ...img, index: i }))
+      .filter(img => img.section === s.key),
+  }))
+  .filter(s => s.images.length > 0);
+
+const gridSections = grouped.filter(s => GRID_SECTIONS.includes(s.key));
+const fullSections = grouped.filter(s => FULL_SECTIONS.includes(s.key));
+---
+
+<div
+  id="gallery-modal"
+  class="fixed inset-0 z-50 hidden bg-white overflow-y-auto"
+  role="dialog"
+  aria-modal="true"
+  aria-label={lang === 'fr' ? 'Toutes les photos' : 'All photos'}
+>
+  <div class="sticky top-0 z-10 bg-white border-b border-gray-100 px-4 sm:px-8 py-4 flex items-center justify-between">
+    <h2 class="font-display text-xl text-dusk">
+      {lang === 'fr' ? 'Toutes les photos' : 'All photos'}
+      <span class="text-sm font-sans font-normal text-dusk/40 ml-2">{images.length}</span>
+    </h2>
+    <button
+      id="modal-close"
+      class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors text-dusk/60 hover:text-dusk"
+      aria-label="Fermer"
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="max-w-5xl mx-auto px-4 sm:px-8 py-8 space-y-12">
+
+    <!-- 2-column section grid for interior/local photos -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {gridSections.map(section => (
+        <div id={`modal-section-${section.key}`}>
+          <h3 class="text-xs font-semibold uppercase tracking-widest text-dusk/40 mb-1">{section.label}</h3>
+          <div
+            class="group relative aspect-[4/3] overflow-hidden cursor-zoom-in"
+            data-lightbox-index={section.images[0].index}
+          >
+            <img
+              src={section.images[0].src}
+              alt={section.images[0].alt}
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-end">
+              <p class="w-full px-3 py-2 text-white text-xs translate-y-2 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                {section.images[0].alt}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Full-width sections for Le Port and Les plages -->
+    {fullSections.map(section => (
+      <div id={`modal-section-${section.key}`}>
+        <h3 class="text-xs font-semibold uppercase tracking-widest text-dusk/40 mb-1">{section.label}</h3>
+        <div class={`grid gap-1 ${section.images.length === 2 ? 'grid-cols-2' : 'grid-cols-2 md:grid-cols-3'}`}>
+          {section.images.map(img => (
+            <div
+              class="group relative aspect-[4/3] overflow-hidden cursor-zoom-in"
+              data-lightbox-index={img.index}
+            >
+              <img
+                src={img.src}
+                alt={img.alt}
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-end">
+                <p class="w-full px-3 py-2 text-white text-xs translate-y-2 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                  {img.alt}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+
+  </div>
+</div>
+
+<!-- Lightbox sublayer -->
+<div id="lightbox" class="fixed inset-0 z-[100] hidden bg-black/90 flex items-center justify-center">
+  <button id="lightbox-close" class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors" aria-label="Fermer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+      <line x1="18" y1="6" x2="6" y2="18"/>
+      <line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+  </button>
+  <button id="lightbox-prev" class="absolute left-4 w-11 h-11 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors" aria-label="Précédent">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+      <polyline points="15 18 9 12 15 6"/>
+    </svg>
+  </button>
+  <button id="lightbox-next" class="absolute right-4 w-11 h-11 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors" aria-label="Suivant">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+      <polyline points="9 6 15 12 9 18"/>
+    </svg>
+  </button>
+  <img id="lightbox-img" src="" alt="" class="max-h-[90vh] max-w-[90vw] object-contain rounded-lg select-none" />
+  <p id="lightbox-caption" class="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/60 text-sm"></p>
+</div>
+
+<script>
+  import { images } from '../data/gallery';
+
+  const modal = document.getElementById('gallery-modal')!;
+  const closeBtn = document.getElementById('modal-close')!;
+  const lightbox = document.getElementById('lightbox')!;
+  const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+  const lightboxCaption = document.getElementById('lightbox-caption')!;
+  const lightboxClose = document.getElementById('lightbox-close')!;
+  const lightboxPrev = document.getElementById('lightbox-prev')!;
+  const lightboxNext = document.getElementById('lightbox-next')!;
+
+  let currentIndex = 0;
+
+  function openModal(sectionKey?: string) {
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    if (sectionKey) {
+      const target = document.getElementById(`modal-section-${sectionKey}`);
+      if (target) {
+        requestAnimationFrame(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+      }
+    } else {
+      modal.scrollTop = 0;
+    }
+  }
+
+  function closeModal() {
+    modal.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  function openLightbox(index: number) {
+    currentIndex = index;
+    const img = images[currentIndex];
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt;
+    lightboxCaption.textContent = img.alt;
+    lightbox.classList.remove('hidden');
+  }
+
+  function closeLightbox() {
+    lightbox.classList.add('hidden');
+  }
+
+  function navigate(dir: 1 | -1) {
+    currentIndex = (currentIndex + dir + images.length) % images.length;
+    const img = images[currentIndex];
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt;
+    lightboxCaption.textContent = img.alt;
+  }
+
+  modal.addEventListener('click', (e) => {
+    const tile = (e.target as HTMLElement).closest<HTMLElement>('[data-lightbox-index]');
+    if (!tile) return;
+    openLightbox(Number(tile.dataset.lightboxIndex));
+  });
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightboxPrev.addEventListener('click', () => navigate(-1));
+  lightboxNext.addEventListener('click', () => navigate(1));
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+
+  document.addEventListener('keydown', (e) => {
+    if (lightbox.classList.contains('hidden')) {
+      if (e.key === 'Escape') closeModal();
+    } else {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') navigate(-1);
+      if (e.key === 'ArrowRight') navigate(1);
+    }
+  });
+
+  document.addEventListener('gallery:open', (e) => {
+    const { sectionKey } = (e as CustomEvent).detail;
+    openModal(sectionKey);
+  });
+</script>
