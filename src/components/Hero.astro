@@ -10,19 +10,14 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 const bookHref = lang === 'fr' ? '/fr/reserver' : '/en/book';
 ---
-<section class="relative h-screen flex items-center justify-center overflow-hidden">
-  <!--
-    Hero image: uncomment and remove the gradient div once photos are available.
-    Recommended: 1920×1080 min, WebP format, landscape orientation.
-    <img
-      src="/images/hero.jpg"
-      alt="Vue de l'appartement Étoile de la Mer, Cap d'Agde"
-      class="absolute inset-0 w-full h-full object-cover"
-      loading="eager"
-      fetchpriority="high"
-    />
-  -->
-  <div class="absolute inset-0 bg-gradient-to-br from-mer-dark via-mer to-turquoise"></div>
+<section class="relative h-[70vh] flex items-center justify-center overflow-hidden">
+  <img
+    src="/images/hero.webp"
+    alt="Vue de l'appartement Étoile de la Mer, Cap d'Agde"
+    class="absolute inset-0 w-full h-full object-cover"
+    loading="eager"
+    fetchpriority="high"
+  />
   <div class="absolute inset-0 bg-dusk/25"></div>
 
   <div class="relative text-center text-white px-4 max-w-3xl mx-auto">
