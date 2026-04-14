@@ -22,10 +22,11 @@ const WEB3FORMS_KEY = '5accaafb-f012-4315-a413-27b49d5b13f9';
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
       <div>
-        <label class="block text-xs font-semibold text-dusk uppercase tracking-wide mb-1.5">
+        <label for="field-name" class="block text-xs font-semibold text-dusk uppercase tracking-wide mb-1.5">
           {t('contact.name')} *
         </label>
         <input
+          id="field-name"
           type="text"
           name="name"
           required
@@ -33,10 +34,11 @@ const WEB3FORMS_KEY = '5accaafb-f012-4315-a413-27b49d5b13f9';
         />
       </div>
       <div>
-        <label class="block text-xs font-semibold text-dusk uppercase tracking-wide mb-1.5">
+        <label for="field-email" class="block text-xs font-semibold text-dusk uppercase tracking-wide mb-1.5">
           {t('contact.email')} *
         </label>
         <input
+          id="field-email"
           type="email"
           name="email"
           required
@@ -47,10 +49,11 @@ const WEB3FORMS_KEY = '5accaafb-f012-4315-a413-27b49d5b13f9';
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
       <div>
-        <label class="block text-xs font-semibold text-dusk uppercase tracking-wide mb-1.5">
+        <label for="field-arrival" class="block text-xs font-semibold text-dusk uppercase tracking-wide mb-1.5">
           {t('contact.arrival')} *
         </label>
         <input
+          id="field-arrival"
           type="date"
           name="arrival"
           required
@@ -58,10 +61,11 @@ const WEB3FORMS_KEY = '5accaafb-f012-4315-a413-27b49d5b13f9';
         />
       </div>
       <div>
-        <label class="block text-xs font-semibold text-dusk uppercase tracking-wide mb-1.5">
+        <label for="field-departure" class="block text-xs font-semibold text-dusk uppercase tracking-wide mb-1.5">
           {t('contact.departure')} *
         </label>
         <input
+          id="field-departure"
           type="date"
           name="departure"
           required
@@ -71,10 +75,11 @@ const WEB3FORMS_KEY = '5accaafb-f012-4315-a413-27b49d5b13f9';
     </div>
 
     <div>
-      <label class="block text-xs font-semibold text-dusk uppercase tracking-wide mb-1.5">
+      <label for="field-guests" class="block text-xs font-semibold text-dusk uppercase tracking-wide mb-1.5">
         {t('contact.guests')}
       </label>
       <select
+        id="field-guests"
         name="guests"
         class="w-full border border-sable-dark/40 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-mer focus:border-transparent outline-none transition bg-white"
       >
@@ -86,10 +91,11 @@ const WEB3FORMS_KEY = '5accaafb-f012-4315-a413-27b49d5b13f9';
     </div>
 
     <div>
-      <label class="block text-xs font-semibold text-dusk uppercase tracking-wide mb-1.5">
+      <label for="field-message" class="block text-xs font-semibold text-dusk uppercase tracking-wide mb-1.5">
         {t('contact.message')}
       </label>
       <textarea
+        id="field-message"
         name="message"
         rows="4"
         class="w-full border border-sable-dark/40 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-mer focus:border-transparent outline-none transition resize-none"
@@ -137,7 +143,7 @@ const WEB3FORMS_KEY = '5accaafb-f012-4315-a413-27b49d5b13f9';
         form.reset();
         successEl.classList.remove('hidden');
       } else {
-        throw new Error('submission failed');
+        errorEl.classList.remove('hidden');
       }
     } catch {
       errorEl.classList.remove('hidden');
