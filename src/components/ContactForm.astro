@@ -10,7 +10,6 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 
 const WEB3FORMS_KEY = '5accaafb-f012-4315-a413-27b49d5b13f9';
-const HCAPTCHA_SITE_KEY = 'aeb451fc-b2c2-45ae-b018-532c727e3bd2';
 ---
 <div>
   <h2 class="font-display text-2xl text-dusk mb-2">{t('contact.title')}</h2>
@@ -97,8 +96,6 @@ const HCAPTCHA_SITE_KEY = 'aeb451fc-b2c2-45ae-b018-532c727e3bd2';
       ></textarea>
     </div>
 
-    <div class="h-captcha" data-sitekey={HCAPTCHA_SITE_KEY}></div>
-
     <div id="form-success" class="hidden bg-green-50 border border-green-200 text-green-800 rounded-xl px-4 py-3 text-sm">
       {t('contact.success')}
     </div>
@@ -115,8 +112,6 @@ const HCAPTCHA_SITE_KEY = 'aeb451fc-b2c2-45ae-b018-532c727e3bd2';
     </button>
   </form>
 </div>
-
-<script is:inline src="https://js.hcaptcha.com/1/api.js" async defer></script>
 
 <script>
   const form = document.getElementById('contact-form') as HTMLFormElement;
