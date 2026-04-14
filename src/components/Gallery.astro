@@ -15,29 +15,53 @@ const t = useTranslations(lang);
   Recommended: 8–16 photos covering interior, bedroom, terrace, exterior.
 */
 const images: { src: string; alt: string }[] = [
-  // { src: '/images/gallery/01.jpg', alt: 'Séjour lumineux' },
-  // { src: '/images/gallery/02.jpg', alt: 'Chambre' },
-  // { src: '/images/gallery/03.jpg', alt: 'Terrasse loggia' },
+  { src: '/images/gallery/01.webp', alt: 'Appartement Étoile de la Mer' },
+  { src: '/images/gallery/02.webp', alt: 'Appartement Étoile de la Mer' },
+  { src: '/images/gallery/03.webp', alt: 'Appartement Étoile de la Mer' },
+  { src: '/images/gallery/04.webp', alt: 'Appartement Étoile de la Mer' },
+  { src: '/images/gallery/05.webp', alt: 'Appartement Étoile de la Mer' },
+  { src: '/images/gallery/06.webp', alt: 'Appartement Étoile de la Mer' },
+  { src: '/images/gallery/07.webp', alt: 'Appartement Étoile de la Mer' },
+  { src: '/images/gallery/08.webp', alt: 'Appartement Étoile de la Mer' },
+  { src: '/images/gallery/09.webp', alt: 'Appartement Étoile de la Mer' },
+  { src: '/images/gallery/10.webp', alt: 'Appartement Étoile de la Mer' },
+  { src: '/images/gallery/11.webp', alt: 'Appartement Étoile de la Mer' },
+  { src: '/images/gallery/12.webp', alt: 'Appartement Étoile de la Mer' },
+  { src: '/images/gallery/13.webp', alt: 'Appartement Étoile de la Mer' },
+  { src: '/images/gallery/14.webp', alt: 'Appartement Étoile de la Mer' },
+  { src: '/images/gallery/15.webp', alt: 'Appartement Étoile de la Mer' },
 ];
 
 const hasImages = images.length > 0;
 ---
-<section id="gallery" class="py-10 bg-ecume">
+<section id="gallery" class="py-10 bg-ecume overflow-hidden">
   <div class="max-w-6xl mx-auto px-4 sm:px-6">
     <h2 class="font-display text-4xl text-center text-dusk mb-12">{t('gallery.title')}</h2>
 
     {hasImages ? (
-      <div class="swiper gallery-swiper rounded-2xl overflow-hidden shadow-xl">
-        <div class="swiper-wrapper">
-          {images.map(img => (
-            <div class="swiper-slide">
-              <img src={img.src} alt={img.alt} class="w-full h-[60vh] object-cover" loading="lazy" />
-            </div>
-          ))}
+      <div class="px-2">
+        <div class="swiper gallery-swiper">
+          <div class="swiper-wrapper">
+            {images.map(img => (
+              <div class="swiper-slide">
+                <div class="rounded-2xl overflow-hidden shadow-xl">
+                  <img src={img.src} alt={img.alt} class="w-full h-[30vh] sm:h-[52vh] lg:h-[60vh] object-cover" loading="lazy" />
+                </div>
+              </div>
+            ))}
+          </div>
+          <button class="gallery-btn gallery-btn-prev" aria-label="Previous">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"/>
+            </svg>
+          </button>
+          <button class="gallery-btn gallery-btn-next" aria-label="Next">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 6 15 12 9 18"/>
+            </svg>
+          </button>
         </div>
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
+        <div class="gallery-pagination"></div>
       </div>
     ) : (
       <div class="rounded-2xl bg-mer/5 border-2 border-dashed border-mer/20 h-64 flex flex-col items-center justify-center gap-3">
@@ -57,10 +81,64 @@ const hasImages = images.length > 0;
     <script is:inline>
       new Swiper('.gallery-swiper', {
         loop: true,
-        pagination: { el: '.swiper-pagination', clickable: true },
-        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+        slidesPerView: 1.35,
+        spaceBetween: 10,
+        centeredSlides: true,
+        watchSlidesProgress: true,
+        autoplay: { delay: 6000, disableOnInteraction: false, pauseOnMouseEnter: true },
+        pagination: { el: '.gallery-pagination', clickable: true },
+        navigation: { nextEl: '.gallery-btn-next', prevEl: '.gallery-btn-prev' },
         keyboard: { enabled: true },
       });
     </script>
   </Fragment>
 )}
+
+<style is:global>
+  .gallery-swiper .swiper-slide > div {
+    transform: scale(0.92);
+    opacity: 0.4;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+  }
+  .gallery-swiper .swiper-slide-active > div {
+    transform: scale(1);
+    opacity: 1;
+  }
+  .gallery-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    color: #1EACB7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .gallery-btn:hover {
+    background: #1EACB7;
+    color: white;
+  }
+  .gallery-btn svg {
+    width: 22px;
+    height: 22px;
+  }
+  .gallery-btn-prev { left: 75px; }
+  .gallery-btn-next { right: 75px; }
+  .gallery-swiper {
+    mask-image: linear-gradient(to right, transparent 0%, black 8%, black 90%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 90%, transparent 100%);
+  }
+  .gallery-pagination {
+    position: static;
+    margin-top: 16px;
+    text-align: center;
+  }
+</style>
