@@ -1,6 +1,6 @@
 {
   "nav.home": "Logement",
-  "nav.around": "Autour de nous",
+  "nav.around": "Aux alentours",
   "nav.book": "Réserver",
   "hero.tagline": "Votre petit chez-vous au Cap d'Agde, à deux pas de la mer. Dépaysement garanti, confort assuré.",
   "hero.cta": "Réserver",
@@ -24,7 +24,7 @@
   "book.airbnb_label": "Voir l'annonce",
   "book.lbc_label": "Voir l'annonce",
   "book.direct_note": "Réserver en direct = zéro frais de service pour vous",
-  "around.title": "Autour de nous",
+  "around.title": "Aux alentours",
   "around.subtitle": "Cap d'Agde et la région Hérault regorgent de trésors naturels et culturels.",
   "around.nearby_title": "À proximité",
   "around.nearby_subtitle": "SOUS TEXTE À COMPLÉTER : les incontournables à faire à pied ou en vélo depuis l'appartement.",
