@@ -20,10 +20,12 @@ export function getAlternateUrl(url: URL): string {
     parts[1] = 'en';
     if (parts[2] === 'autour') parts[2] = 'around';
     if (parts[2] === 'reserver') parts[2] = 'book';
+    if (parts[2] === 'mentions-legales') parts[2] = 'legal';
   } else {
     parts[1] = 'fr';
     if (parts[2] === 'around') parts[2] = 'autour';
     if (parts[2] === 'book') parts[2] = 'reserver';
+    if (parts[2] === 'legal') parts[2] = 'mentions-legales';
   }
   return parts.join('/') || '/fr';
 }
