@@ -9,3 +9,14 @@ yarn-error.log*
 .pnp.js
 
 .vscode/*
+
+*.pages
+
+# Build output
+/dist/
+
+# macOS
+.DS_Store
+
+# Claude Code workspace
+.claude/

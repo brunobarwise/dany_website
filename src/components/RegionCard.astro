@@ -1,0 +1,53 @@
+---
+import type { BilingualPlace } from '../data/around';
+import { useTranslations, type Lang } from '../i18n';
+import type fr from '../i18n/fr.json';
+
+interface Props {
+  place: BilingualPlace;
+  lang: Lang;
+}
+
+const { place, lang } = Astro.props;
+const t = useTranslations(lang);
+const tagLabel = (slug: string) =>
+  t(`around.tag.${slug}` as keyof typeof fr);
+
+const tagColors: Record<string, string> = {
+  sea:        'bg-blue-100 text-blue-700',
+  nature:     'bg-green-100 text-green-700',
+  culture:    'bg-violet-100 text-violet-700',
+  food:       'bg-amber-100 text-amber-700',
+  village:    'bg-yellow-100 text-yellow-700',
+  city:       'bg-slate-100 text-slate-600',
+  family:     'bg-pink-100 text-pink-700',
+  activities: 'bg-teal-100 text-teal-700',
+  history:    'bg-stone-100 text-stone-600',
+};
+---
+
+<div class="bg-white rounded-xl p-5 shadow-sm flex flex-col gap-2">
+  <div class="flex items-start justify-between gap-3">
+    <h3 class="font-semibold text-mer leading-snug">{place.name}</h3>
+    <span class="text-xs text-dusk/50 bg-ecume rounded-full px-2.5 py-0.5 shrink-0 mt-0.5">{place.distance}</span>
+  </div>
+  <p class="text-sm font-medium text-dusk/80">{place.tagline[lang]}</p>
+  <p class="text-sm text-dusk/60 leading-relaxed">{place[lang]}</p>
+  <div class="flex flex-wrap gap-1.5 pt-1">
+    {place.tags.map(tag => (
+      <span class={`text-xs rounded-full px-2.5 py-0.5 ${tagColors[tag] ?? 'bg-mer/10 text-mer-dark'}`}>
+        {tagLabel(tag)}
+      </span>
+    ))}
+  </div>
+  {place.href && (
+    <a
+      href={place.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="text-xs text-mer/70 hover:text-mer underline underline-offset-2 self-start mt-1"
+    >
+      {lang === 'fr' ? 'Découvrir →' : 'Explore →'}
+    </a>
+  )}
+</div>

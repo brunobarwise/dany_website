@@ -4,6 +4,7 @@ import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import { useTranslations } from '../../i18n';
 import { nearby, region } from '../../data/around';
+import RegionCard from '../../components/RegionCard.astro';
 
 const lang = 'en' as const;
 const t = useTranslations(lang);
@@ -14,17 +15,18 @@ const t = useTranslations(lang);
   description="Discover activities and places to visit around our apartment in Cap d'Agde: beaches, villages, nature and regional day trips."
 >
   <Nav lang={lang} currentUrl={Astro.url} />
-  <main class="pt-16">
-    <div class="bg-mer-dark text-white py-20 px-4">
+  <main class="pt-10">
+    <div class="bg-mer-dark text-white py-10 px-4">
       <div class="max-w-4xl mx-auto text-center">
         <h1 class="font-display text-5xl font-bold mb-4">{t('around.title')}</h1>
         <p class="text-white/65 max-w-lg mx-auto leading-relaxed">{t('around.subtitle')}</p>
       </div>
     </div>
 
-    <section class="py-16 bg-white">
+    <section class="py-10 bg-white">
       <div class="max-w-4xl mx-auto px-4 sm:px-6">
-        <h2 class="font-display text-3xl text-dusk mb-8">{t('around.nearby_title')}</h2>
+        <h2 class="font-display text-3xl text-dusk mb-4">{t('around.nearby_title')}</h2>
+        <p class="text-dusk/60 leading-relaxed mb-6">{t('around.nearby_subtitle')}</p>
         <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {nearby.map(item => (
             <li class="flex items-start gap-3 bg-ecume rounded-xl p-4">
@@ -36,18 +38,16 @@ const t = useTranslations(lang);
       </div>
     </section>
 
-    <section class="py-16 bg-ecume">
+    <section class="py-10 bg-ecume">
       <div class="max-w-4xl mx-auto px-4 sm:px-6">
-        <h2 class="font-display text-3xl text-dusk mb-8">{t('around.region_title')}</h2>
+        <h2 class="font-display text-3xl text-dusk mb-4">{t('around.region_title')}</h2>
+        <p class="text-dusk/60 leading-relaxed mb-6">{t('around.region_subtitle')}</p>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {region.map(place => (
-            <div class="bg-white rounded-xl p-5 shadow-sm">
-              <h3 class="font-semibold text-mer mb-1">{place.name}</h3>
-              <p class="text-sm text-dusk/65 leading-relaxed">{place[lang]}</p>
-            </div>
+            <RegionCard place={place} lang={lang} />
           ))}
         </div>
-        <p class="text-xs text-dusk/35 mt-10 text-center italic">{t('around.links_note')}</p>
+        <!--<p class="text-xs text-dusk/35 mt-10 text-center italic">{t('around.links_note')}</p>-->
       </div>
     </section>
   </main>
