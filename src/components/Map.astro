@@ -12,8 +12,11 @@ const { lang } = Astro.props;
   A 500 m circle conveys the neighbourhood without revealing the exact building.
   POI coordinates are for publicly known places — no privacy concern.
 */
-const ZONE_LAT = 43.2836;
-const ZONE_LNG = 3.4973;
+const MAP_LAT = 43.277;    // map centre (what the camera looks at)
+const MAP_LNG = 3.50;
+
+const ZONE_LAT = 43.282741;   // privacy circle centre (approximate property location)
+const ZONE_LNG = 3.498319;
 const ZONE_RADIUS = 500;
 
 type Poi = {
@@ -31,16 +34,16 @@ const pois: Poi[] = [
     label: { fr: 'Plage Grande Conque', en: 'Grande Conque beach — 15 min walk' },
   },
   {
-    lat: 43.2741,
-    lng: 3.5032,
+    lat: 43.27492,
+    lng: 3.49857,
     icon: '🏖️',
     label: { fr: 'Plage Richelieu — 15 min à pied, 5 min en vélo', en: 'Plage Richelieu — 15 min walk, 5 min bike' },
   },
   {
-    lat: 43.2748,
-    lng: 3.4815,
+    lat: 43.274524,
+    lng: 3.489972,
     icon: '🏖️',
-    label: { fr: 'Plage de Rochelongue', en: 'Plage de Rochelongue' },
+    label: { fr: 'Plage de Rochelongue — 15 min à pied, 5 min en vélo', en: 'Plage de Rochelongue — 15 min walk, 5 min bike' },
   },
   {
     lat: 43.2869,
@@ -49,8 +52,8 @@ const pois: Poi[] = [
     label: { fr: "Musée de l'Éphèbe et d'archéologie sous-marine", en: "Musée de l'Éphèbe — underwater archaeology museum" },
   },
   {
-    lat: 43.2784,
-    lng: 3.5082,
+    lat: 43.28052,
+    lng: 3.50917,
     icon: '⛵',
     label: { fr: 'Port du Cap d\'Agde', en: 'Cap d\'Agde harbour' },
   },
@@ -73,8 +76,8 @@ const pois: Poi[] = [
     label: { fr: 'Tennis', en: 'Tennis' },
   },
   {
-    lat: 43.2870,
-    lng: 3.5030,
+    lat: 43.287328,
+    lng: 3.508877,
     icon: '🥖',
     label: { fr: 'Marché — samedi matin', en: 'Market — Saturday mornings' },
   },
@@ -85,10 +88,34 @@ const pois: Poi[] = [
     label: { fr: 'Commerces & supermarchés', en: 'Shops & supermarkets' },
   },
   {
-    lat: 43.2960,
-    lng: 3.5020,
+    lat: 43.282741,
+    lng: 3.498319,
     icon: '🚴',
     label: { fr: 'Pistes cyclables', en: 'Cycling paths' },
+  },
+  {
+    lat: 43.27975,
+    lng: 3.49706,
+    icon: '🌊',
+    label: { fr: 'Aqualand', en: 'Aqualand' },
+  },
+  {
+    lat: 43.27928,
+    lng: 3.50365,
+    icon: '🎢',
+    label: { fr: 'Luna Park', en: 'Luna Park' },
+  },
+  {
+    lat: 43.26332,
+    lng: 3.50159,
+    icon: '🏯',
+    label: { fr: 'Fort de Brescou', en: 'Brescou Fort' },
+  },
+  {
+    lat: 43.277793,
+    lng: 3.506098,
+    icon: '🎰',
+    label: { fr: 'Casino du Cap d\'Agde', en: 'Cap d\'Agde Casino' },
   },
 ];
 
@@ -108,11 +135,11 @@ const zoneLabel = lang === 'fr' ? "Quartier Étoile de la Mer" : "Étoile de la 
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script is:inline src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script is:inline define:vars={{ ZONE_LAT, ZONE_LNG, ZONE_RADIUS, pois, zoneLabel, lang }}>
+<script is:inline define:vars={{ MAP_LAT, MAP_LNG, ZONE_LAT, ZONE_LNG, ZONE_RADIUS, pois, zoneLabel, lang }}>
   var map = L.map('leaflet-map', {
     scrollWheelZoom: false,
     zoomControl: true,
-  }).setView([ZONE_LAT, ZONE_LNG], 14);
+  }).setView([MAP_LAT, MAP_LNG], 14);
 
   L.tileLayer(
     'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
