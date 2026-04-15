@@ -21,29 +21,34 @@ npm run preview   # preview the build locally
 
 ## Key files for content updates
 
-| What | Where |
-|---|---|
-| FR copy | `src/i18n/fr.json` |
-| EN copy | `src/i18n/en.json` |
-| Activities + links | `src/data/around.ts` |
-| Hero image | `public/images/hero.jpg` — uncomment `<img>` in `Hero.astro` |
-| Gallery images | `public/images/gallery/` — populate array in `Gallery.astro` |
-| Web3Forms key | `ContactForm.astro` — `WEB3FORMS_KEY` constant |
+
+| What               | Where                                                         |
+| ------------------ | ------------------------------------------------------------- |
+| FR copy            | `src/i18n/fr.json`                                            |
+| EN copy            | `src/i18n/en.json`                                            |
+| Activities + links | `src/data/around.ts`                                          |
+| Hero image         | `public/images/hero.jpg` — uncomment `<img>` in `Hero.astro` |
+| Gallery images     | `public/images/gallery/` — populate array in `Gallery.astro` |
+| Web3Forms key      | `ContactForm.astro` — `WEB3FORMS_KEY` constant               |
 
 ## Routes
 
-| URL | Page |
-|---|---|
-| `/` | Redirect → `/fr` |
-| `/fr` | Accueil (hero + galerie + équipements + avis) |
-| `/fr/autour` | Autour de nous |
-| `/fr/reserver` | Réserver |
-| `/en` | Home |
-| `/en/around` | Around us |
-| `/en/book` | Book your stay |
 
-## Deploy
+| URL            | Page                                           |
+| -------------- | ---------------------------------------------- |
+| `/`            | Redirect →`/fr`                               |
+| `/fr`          | Accueil (hero + galerie + équipements + avis) |
+| `/fr/autour`   | Autour de nous                                 |
+| `/fr/reserver` | Réserver                                      |
+| `/en`          | Home                                           |
+| `/en/around`   | Around us                                      |
+| `/en/book`     | Book your stay                                 |
 
-- Target: **Vercel** (static, free tier)
-- Domain: `location-etoiledelamer-capdagde.fr` — buy on Cloudflare Registrar, then add to Vercel project
-- Wire in `@astrojs/sitemap` integration before first deploy (see comment in `astro.config.mjs`)
+## Deployed
+
+- Domain: **OVH** - `location-etoiledelamer-capdagde.fr`
+  - DNS records point to Vercel
+  - simple forwarding email addresses:
+    - `dany@location-etoiledelamer-capdagde.fr`
+    - `contact@location-etoiledelamer-capdagde.fr`
+- Hosting: **Vercel** - connected to GitHub private repo
