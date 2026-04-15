@@ -43,7 +43,7 @@ const hasImages = images.length > 0;
         <div class="text-center mt-4">
           <button
             id="gallery-view-all"
-            class="text-sm text-dusk/60 hover:text-dusk underline underline-offset-4 transition-colors"
+            class="text-sm text-muted hover:text-dusk underline underline-offset-4 transition-colors"
           >
             {lang === 'fr' ? `Voir les ${images.length} photos` : `View all ${images.length} photos`}
           </button>
@@ -62,20 +62,27 @@ const hasImages = images.length > 0;
 
 {hasImages && (
   <Fragment>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <script is:inline src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" /></noscript>
     <script is:inline>
-      new Swiper('.gallery-swiper', {
-        loop: true,
-        slidesPerView: 1.35,
-        spaceBetween: 10,
-        centeredSlides: true,
-        watchSlidesProgress: true,
-        autoplay: { delay: 6000, disableOnInteraction: false, pauseOnMouseEnter: true },
-        pagination: { el: '.gallery-pagination', clickable: true },
-        navigation: { nextEl: '.gallery-btn-next', prevEl: '.gallery-btn-prev' },
-        keyboard: { enabled: true },
-      });
+      function initSwiper() {
+        new Swiper('.gallery-swiper', {
+          loop: true,
+          slidesPerView: 1.35,
+          spaceBetween: 10,
+          centeredSlides: true,
+          watchSlidesProgress: true,
+          autoplay: { delay: 6000, disableOnInteraction: false, pauseOnMouseEnter: true },
+          pagination: { el: '.gallery-pagination', clickable: true },
+          navigation: { nextEl: '.gallery-btn-next', prevEl: '.gallery-btn-prev' },
+          keyboard: { enabled: true },
+        });
+      }
+
+      var swiperScript = document.createElement('script');
+      swiperScript.src = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js';
+      swiperScript.onload = initSwiper;
+      document.head.appendChild(swiperScript);
     </script>
   </Fragment>
 )}
