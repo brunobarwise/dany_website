@@ -9,10 +9,6 @@ interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-/*
-  PLACEHOLDER reviews — replace with real testimonials once obtained.
-  Written consent required per reviewer before publishing.
-*/
 type Review = {
   name: string;
   stars: number;
@@ -47,15 +43,6 @@ const reviews: Review[] = [
       en: 'A small, quiet flat, very well laid out and lovely with its balcony. Very clean and practical, with everything you need. I highly recommend it. ',
     },
     date: { fr: 'Juin 2025', en: 'June 2025' },
-  },
-  {
-    name: 'Vanessa B.',
-    stars: 5,
-    text: {
-      fr: 'Au calme, parking super. Beau weekend entre farniente au port et visite du musée de l\'Éphèbe.',
-      en: 'Quiet neighbourhood, excellent parking. A lovely weekend spent relaxing at the harbour and visiting the Musée de l\'Éphèbe.',
-    },
-    date: { fr: 'Mai 2025', en: 'May 2025' },
   },
 ];
 ---

@@ -17,7 +17,7 @@ interface Props {
 }
 
 const { lang, title, description, ogImage = '/images/og-share.jpg', preloadHero = false } = Astro.props;
-const siteUrl = 'https://location-etoiledelamer-capdagde.fr';
+const siteUrl = 'https://www.location-etoiledelamer-capdagde.fr';
 const canonical = `${siteUrl}${Astro.url.pathname}`;
 const alternateLang: Lang = lang === 'fr' ? 'en' : 'fr';
 const alternateCanonical = `${siteUrl}${getAlternateUrl(Astro.url)}`;
@@ -59,6 +59,10 @@ const alternateCanonical = `${siteUrl}${getAlternateUrl(Astro.url)}`;
       />
     )}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#1E6091" />
   </head>
   <body class="font-body bg-white text-dusk antialiased">
     <slot />

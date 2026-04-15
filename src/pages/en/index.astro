@@ -7,16 +7,20 @@ import GalleryModal from '../../components/GalleryModal.astro';
 import Amenities from '../../components/Amenities.astro';
 import Map from '../../components/Map.astro';
 import Reviews from '../../components/Reviews.astro';
+import FAQ from '../../components/FAQ.astro';
+import SchemaLodging from '../../components/SchemaLodging.astro';
 import Footer from '../../components/Footer.astro';
 
 const lang = 'en' as const;
+const description = "2-star classified 2-room apartment in Cap d'Agde. Covered terrace, private parking, beach 15 min on foot. Up to 4 guests. Book direct.";
 ---
 <Base
   lang={lang}
   title="Étoile de la Mer — Holiday rental in Cap d'Agde"
-  description="2-star classified 2-room apartment in Cap d'Agde. Covered terrace, private parking, beach 15 min on foot. Up to 4 guests. Book direct."
+  description={description}
   preloadHero
 >
+  <SchemaLodging lang={lang} description={description} />
   <Nav lang={lang} currentUrl={Astro.url} />
   <main class="pt-16">
     <Hero lang={lang} />
@@ -24,6 +28,7 @@ const lang = 'en' as const;
     <Amenities lang={lang} />
     <Map lang={lang} />
     <Reviews lang={lang} />
+    <FAQ lang={lang} />
   </main>
   <GalleryModal lang={lang} />
   <Footer lang={lang} />

@@ -1,0 +1,85 @@
+---
+import type { Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  description: string;
+}
+
+const { lang, description } = Astro.props;
+const siteUrl = 'https://www.location-etoiledelamer-capdagde.fr';
+const pageUrl = `${siteUrl}/${lang}/`;
+
+const amenityNames: Record<Lang, string[]> = {
+  fr: [
+    'Parking privatif',
+    'Terrasse loggia couverte',
+    'Cuisine entièrement équipée',
+    'Lave-linge',
+    'Résidence sécurisée',
+    'Appartement traversant plein sud',
+    'Douche',
+    'WC séparé',
+  ],
+  en: [
+    'Private parking',
+    'Covered loggia terrace',
+    'Fully equipped kitchen',
+    'Washing machine',
+    'Secured residence',
+    'South-facing through-apartment',
+    'Shower',
+    'Separate WC',
+  ],
+};
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'LodgingBusiness',
+  name: 'Étoile de la Mer',
+  description,
+  url: pageUrl,
+  image: [
+    `${siteUrl}/images/gallery/01.webp`,
+    `${siteUrl}/images/gallery/02.webp`,
+    `${siteUrl}/images/gallery/03.webp`,
+    `${siteUrl}/images/gallery/04.webp`,
+    `${siteUrl}/images/gallery/05.webp`,
+    `${siteUrl}/images/gallery/06.webp`,
+  ],
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: "Cap d'Agde",
+    postalCode: '34300',
+    addressCountry: 'FR',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 43.282741,
+    longitude: 3.498319,
+  },
+  numberOfRooms: 2,
+  occupancy: {
+    '@type': 'QuantitativeValue',
+    maxValue: 4,
+  },
+  starRating: {
+    '@type': 'Rating',
+    ratingValue: '2',
+  },
+  amenityFeature: amenityNames[lang].map(name => ({
+    '@type': 'LocationFeatureSpecification',
+    name,
+    value: true,
+  })),
+  inLanguage: lang === 'fr' ? 'fr-FR' : 'en-GB',
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '5',
+    reviewCount: '3',
+    bestRating: '5',
+    worstRating: '1',
+  },
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

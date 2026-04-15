@@ -1,0 +1,11 @@
+{
+  "name": "Étoile de la Mer — Cap d'Agde",
+  "short_name": "Étoile de la Mer",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "start_url": "/fr",
+  "display": "browser",
+  "theme_color": "#1E6091"
+}

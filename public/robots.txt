@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /fr/mentions-legales
+Disallow: /en/legal
+Sitemap: https://www.location-etoiledelamer-capdagde.fr/sitemap-index.xml

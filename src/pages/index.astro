@@ -1,3 +1,13 @@
 ---
-return Astro.redirect('/fr', 302);
+// Root redirect handled at edge by Vercel (vercel.json).
+// This static fallback exists for non-Vercel environments only.
+// Excluded from sitemap via astro.config.mjs filter.
 ---
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="refresh" content="0;url=/fr" />
+    <link rel="canonical" href="/fr" />
+  </head>
+  <body></body>
+</html>

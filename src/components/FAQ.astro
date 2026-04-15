@@ -1,0 +1,115 @@
+---
+import type { Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+type FaqItem = {
+  q: { fr: string; en: string };
+  a: { fr: string; en: string };
+};
+
+const faqs: FaqItem[] = [
+  {
+    q: {
+      fr: "Y a-t-il un parking ?",
+      en: "Is there parking?",
+    },
+    a: {
+      fr: "Oui, un parking privatif est inclus dans la location.",
+      en: "Yes, private parking is included with the rental.",
+    },
+  },
+  {
+    q: {
+      fr: "Les plages sont-elles accessibles à pied ?",
+      en: "Are the beaches walkable?",
+    },
+    a: {
+      fr: "Oui. La plage de Richelieu est à 15 min à pied ou 5 min à vélo depuis l'appartement.",
+      en: "Yes. Richelieu beach is 15 minutes on foot or 5 minutes by bike from the apartment.",
+    },
+  },
+  {
+    q: {
+      fr: "Quelle est la capacité de l'appartement ?",
+      en: "What is the maximum occupancy?",
+    },
+    a: {
+      fr: "L'appartement accueille jusqu'à 4 personnes : 1 chambre avec lits jumeaux et 1 cabine avec 2 lits superposés.",
+      en: "The apartment sleeps up to 4 guests: 1 bedroom with twin beds and 1 cabin with bunk beds.",
+    },
+  },
+  {
+    q: {
+      fr: "Y a-t-il le WiFi ?",
+      en: "Is there WiFi?",
+    },
+    a: {
+      fr: "Non, il n'y a pas de WiFi fixe. En revanche, la réception 4G/5G est excellente dans l'appartement.",
+      en: "There is no fixed WiFi. However, 4G/5G reception is excellent throughout the apartment.",
+    },
+  },
+  {
+    q: {
+      fr: "Y a-t-il la climatisation ?",
+      en: "Is there air conditioning?",
+    },
+    a: {
+      fr: "Non, mais l'appartement est traversant plein sud et très bien ventilé naturellement.",
+      en: "No, but the apartment is south-facing throughout and naturally well-ventilated.",
+    },
+  },
+  {
+    q: {
+      fr: "Les animaux de compagnie sont-ils acceptés ?",
+      en: "Are pets allowed?",
+    },
+    a: {
+      fr: "Non, les animaux de compagnie ne sont pas acceptés.",
+      en: "No, pets are not allowed.",
+    },
+  },
+];
+
+const heading = lang === 'fr' ? 'Questions fréquentes' : 'Frequently asked questions';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(f => ({
+    '@type': 'Question',
+    name: f.q[lang],
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: f.a[lang],
+    },
+  })),
+};
+---
+<section id="faq" class="py-10 bg-white">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6">
+    <h2 class="font-display text-4xl text-center text-dusk mb-10">{heading}</h2>
+    <div class="divide-y divide-sable/30">
+      {faqs.map(f => (
+        <details class="group py-5">
+          <summary class="flex items-center justify-between gap-4 cursor-pointer list-none text-dusk font-semibold text-base select-none">
+            {f.q[lang]}
+            <svg
+              class="w-5 h-5 shrink-0 text-mer transition-transform duration-200 group-open:rotate-180"
+              fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"
+            >
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </summary>
+          <p class="mt-3 text-muted text-sm leading-relaxed">{f.a[lang]}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
