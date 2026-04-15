@@ -16,6 +16,7 @@ export default {
           dark: '#B8894A',
         },
         dusk: '#2D3748',
+        muted: '#6B7280',
       },
       fontFamily: {
         display: ['Playfair Display', 'Georgia', 'serif'],

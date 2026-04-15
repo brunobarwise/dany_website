@@ -43,7 +43,7 @@ const platforms = [
         <div class="lg:col-span-2 space-y-12">
           <div>
             <h2 class="font-display text-2xl text-dusk mb-4">{t('book.conditions_title')}</h2>
-            <div class="bg-ecume rounded-2xl p-6 text-sm text-dusk/60 italic leading-relaxed">
+            <div class="bg-ecume rounded-2xl p-6 text-sm text-muted italic leading-relaxed">
               {t('book.conditions_placeholder')}
             </div>
           </div>
@@ -53,7 +53,7 @@ const platforms = [
 
         <aside>
           <h2 class="font-display text-2xl text-dusk mb-2">{t('book.platforms_title')}</h2>
-          <p class="text-xs text-dusk/50 mb-6 leading-relaxed">{t('book.direct_note')}</p>
+          <p class="text-xs text-muted mb-6 leading-relaxed">{t('book.direct_note')}</p>
           <div class="space-y-4">
             {platforms.map(p => (
               <a
