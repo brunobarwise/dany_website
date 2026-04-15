@@ -22,12 +22,14 @@ const canonical = `${siteUrl}${Astro.url.pathname}`;
 const alternateLang: Lang = lang === 'fr' ? 'en' : 'fr';
 const alternateCanonical = `${siteUrl}${getAlternateUrl(Astro.url)}`;
 ---
+<!-- Built by Bruno Barwise — brunobarwise.com -->
 <!doctype html>
 <html lang={lang} class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="author" content="Bruno Barwise" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <link rel="canonical" href={canonical} />
@@ -62,6 +64,7 @@ const alternateCanonical = `${siteUrl}${getAlternateUrl(Astro.url)}`;
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <link rel="author" href="/humans.txt" />
     <meta name="theme-color" content="#1E6091" />
   </head>
   <body class="font-body bg-white text-dusk antialiased">

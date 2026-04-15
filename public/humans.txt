@@ -1,0 +1,8 @@
+/* TEAM */
+Developer: Bruno Barwise
+Site: https://github.com/brunobarwise
+
+/* SITE */
+Built with: Astro, Tailwind CSS
+Language: FR / EN
+Hosted on: Vercel
