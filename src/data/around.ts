@@ -37,7 +37,7 @@ export const region: BilingualPlace[] = [
       en: "The singular island, city of Brassens",
     },
     fr: "Construite sur un rocher entre mer et étang, Sète est une ville-port à l'âme populaire et méditerranéenne. Flânez sur les canaux animés de la Corniche, plongez dans le marché couvert des Halles pour découvrir les tielles (petits pâtés de poulpe épicés), et montez au Cimetière Marin où repose Georges Brassens. Ne manquez pas les joutes nautiques en été ni les tableaux d'artistes locaux dans les ateliers du quai.",
-    en: "Charming island city, its covered market and local speciality tielles octopus pies, birthplace of Georges Brassens",
+    en: "Built on a rock between the sea and a lagoon, Sète is a port town with a lively, Mediterranean spirit. Stroll along the bustling canals of the Corniche, pop into the covered market at Les Halles to try some tielles (spicy octopus pastries), and head up to the Marine Cemetery, where Georges Brassens is buried. Don’t miss the water jousting in summer or the paintings by local artists in the studios along the quay.",
     tags: ['sea', 'culture', 'food'],
   },
   {
