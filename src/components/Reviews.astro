@@ -24,7 +24,7 @@ const reviews: Review[] = [
       fr: 'Logement très bien placé, accueil des propriétaires très chaleureux. Super d’avoir une chambre indépendante, très calme. Nous avons apprécié de pouvoir faire à pied les courses et nous rendre à la plage. Bonne location de vacances.',
       en: 'The accommodation is in a great location, and the owners gave us a very warm welcome. It was lovely to have a separate bedroom; it was very quiet. We really appreciated being able to walk to the shops and the beach. A great holiday rental.',
     },
-    date: { fr: 'Octobre 2025', en: 'October 2025' },
+    date: { fr: 'Février 2026', en: 'February 2065' },
   },
   {
     name: 'Eve et Philippe A.',
@@ -33,7 +33,7 @@ const reviews: Review[] = [
       fr: 'Séjour très agréable dans cet appartement. Le logement est très propre et au calme tout en étant proche des commerces. Nous recommandons !',
       en: 'We had a very pleasant stay in this flat. The accommodation is very clean and quiet, yet close to the shops. We highly recommend it!',
     },
-    date: { fr: 'Juillet 2025', en: 'July 2025' },
+    date: { fr: 'Octobre 2025', en: 'October 2025' },
   },
   {
     name: 'Odile M.',
@@ -42,14 +42,14 @@ const reviews: Review[] = [
       fr: 'Petit appartement au calme, très bien agencé, très agréable avec son balcon. Très propre et pratique, rien ne manque, je le recommande.',
       en: 'A small, quiet flat, very well laid out and lovely with its balcony. Very clean and practical, with everything you need. I highly recommend it. ',
     },
-    date: { fr: 'Juin 2025', en: 'June 2025' },
+    date: { fr: 'Juillet 2025', en: 'July 2025' },
   },
 ];
 ---
 <section id="reviews" class="pt-10 pb-20 bg-white">
   <div class="max-w-6xl mx-auto px-4 sm:px-6">
     <h2 class="font-display text-4xl text-center text-dusk mb-12">{t('reviews.title')}</h2>
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
       {reviews.map(r => (
         <div class="bg-ecume rounded-2xl p-6 shadow-sm">
           <div class="flex gap-1 mb-4">

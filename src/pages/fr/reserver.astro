@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import ContactForm from '../../components/ContactForm.astro';
+import FAQ from '../../components/FAQ.astro';
 import Footer from '../../components/Footer.astro';
 import { useTranslations } from '../../i18n';
 
@@ -49,6 +50,7 @@ const platforms = [
           </div>
 
           <ContactForm lang={lang} />
+          <FAQ lang={lang} inline />
         </div>
 
         <aside class="lg:pt-0">
