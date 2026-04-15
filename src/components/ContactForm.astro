@@ -17,7 +17,7 @@ const WEB3FORMS_KEY = '5accaafb-f012-4315-a413-27b49d5b13f9';
 
   <form id="contact-form" class="space-y-5" data-submit-label={t('contact.submit')}>
     <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />
-    <input type="checkbox" name="botcheck" class="hidden" style="display:none" />
+    <input type="checkbox" name="botcheck" class="hidden" style="display:none" aria-hidden="true" tabindex="-1" autocomplete="off" />
     <input type="hidden" name="subject" value={t('contact.subject')} />
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
