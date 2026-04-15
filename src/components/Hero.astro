@@ -12,7 +12,9 @@ const bookHref = lang === 'fr' ? '/fr/reserver' : '/en/book';
 ---
 <section class="relative h-[70vh] flex items-center justify-center overflow-hidden">
   <img
-    src="/images/hero.webp"
+    srcset="/images/hero-mobile.webp 900w, /images/hero-desktop.webp 2560w"
+    sizes="100vw"
+    src="/images/hero-desktop.webp"
     alt="Vue de l'appartement Étoile de la Mer, Cap d'Agde"
     class="absolute inset-0 w-full h-full object-cover"
     loading="eager"

@@ -7,9 +7,10 @@ interface Props {
   title: string;
   description: string;
   ogImage?: string;
+  preloadHero?: boolean;
 }
 
-const { lang, title, description, ogImage = '/images/hero.webp' } = Astro.props;
+const { lang, title, description, ogImage = '/images/hero.webp', preloadHero = false } = Astro.props;
 const siteUrl = 'https://location-etoiledelamer-capdagde.fr';
 const canonical = `${siteUrl}${Astro.url.pathname}`;
 const alternateLang: Lang = lang === 'fr' ? 'en' : 'fr';
@@ -40,6 +41,15 @@ const alternateCanonical = `${siteUrl}${getAlternateUrl(Astro.url)}`;
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
+    {preloadHero && (
+      <link
+        rel="preload"
+        as="image"
+        imagesrcset="/images/hero-mobile.webp 900w, /images/hero-desktop.webp 2560w"
+        imagesizes="100vw"
+        fetchpriority="high"
+      />
+    )}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body class="font-body bg-white text-dusk antialiased">
