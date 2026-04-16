@@ -129,62 +129,68 @@ const zoneLabel = lang === 'fr' ? "Quartier Étoile de la Mer" : "Étoile de la 
   <div class="max-w-6xl mx-auto px-4 sm:px-6">
     <h2 class="font-display text-4xl text-center text-dusk mb-3">{heading}</h2>
     <p class="text-center text-muted text-sm mb-10">{subheading}</p>
-    <div id="leaflet-map" class="relative z-0 h-[480px] rounded-2xl overflow-hidden shadow-xl"></div>
+    <div
+      id="leaflet-map"
+      class="relative z-0 h-[480px] rounded-2xl overflow-hidden shadow-xl"
+      data-config={JSON.stringify({ MAP_LAT, MAP_LNG, ZONE_LAT, ZONE_LNG, ZONE_RADIUS, pois, zoneLabel, lang })}
+    ></div>
   </div>
 </section>
 
-<link rel="preload" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-<noscript><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" /></noscript>
-<script is:inline define:vars={{ MAP_LAT, MAP_LNG, ZONE_LAT, ZONE_LNG, ZONE_RADIUS, pois, zoneLabel, lang }}>
-  function initLeafletMap() {
-    var map = L.map('leaflet-map', {
-      scrollWheelZoom: false,
-      zoomControl: true,
-    }).setView([MAP_LAT, MAP_LNG], 14);
+<script>
+  import L from 'leaflet';
+  import 'leaflet/dist/leaflet.css';
 
-    L.tileLayer(
-      'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-      {
-        attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-        subdomains: 'abcd',
-        maxZoom: 19,
-      }
-    ).addTo(map);
+  type Poi = { lat: number; lng: number; icon: string; label: Record<string, string> };
 
-    L.circle([ZONE_LAT, ZONE_LNG], {
-      radius: ZONE_RADIUS,
-      color: '#0B3B6A',
-      fillColor: '#1EACB7',
-      fillOpacity: 0.20,
-      weight: 2.5,
-      opacity: 0.70,
-    }).addTo(map).bindPopup(zoneLabel);
+  const el = document.getElementById('leaflet-map')!;
+  const { MAP_LAT, MAP_LNG, ZONE_LAT, ZONE_LNG, ZONE_RADIUS, pois, zoneLabel, lang } =
+    JSON.parse(el.dataset.config!) as {
+      MAP_LAT: number; MAP_LNG: number;
+      ZONE_LAT: number; ZONE_LNG: number; ZONE_RADIUS: number;
+      pois: Poi[]; zoneLabel: string; lang: string;
+    };
 
-    pois.forEach(function (poi) {
-      var icon = L.divIcon({
-        className: '',
-        html:
-          '<div style="font-size:22px;line-height:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.35));">'
-          + poi.icon +
-          '</div>',
-        iconSize: [28, 28],
-        iconAnchor: [14, 14],
-        popupAnchor: [0, -16],
-      });
+  const map = L.map(el, { scrollWheelZoom: false, zoomControl: true })
+    .setView([MAP_LAT, MAP_LNG], 14);
 
-      L.marker([poi.lat, poi.lng], { icon: icon })
-        .addTo(map)
-        .bindPopup(
-          '<span style="font-size:13px;font-family:system-ui,sans-serif;">'
-          + poi.label[lang] +
-          '</span>'
-        );
+  L.tileLayer(
+    'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+    {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors ' +
+        '&copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 19,
+    }
+  ).addTo(map);
+
+  L.circle([ZONE_LAT, ZONE_LNG], {
+    radius: ZONE_RADIUS,
+    color: '#0B3B6A',
+    fillColor: '#1EACB7',
+    fillOpacity: 0.20,
+    weight: 2.5,
+    opacity: 0.70,
+  }).addTo(map).bindPopup(zoneLabel);
+
+  pois.forEach((poi: Poi) => {
+    const icon = L.divIcon({
+      className: '',
+      html:
+        '<div style="font-size:22px;line-height:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.35));">' +
+        poi.icon +
+        '</div>',
+      iconSize: [28, 28],
+      iconAnchor: [14, 14],
+      popupAnchor: [0, -16],
     });
-  }
-
-  var leafletScript = document.createElement('script');
-  leafletScript.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-  leafletScript.onload = initLeafletMap;
-  document.head.appendChild(leafletScript);
+    L.marker([poi.lat, poi.lng], { icon })
+      .addTo(map)
+      .bindPopup(
+        '<span style="font-size:13px;font-family:system-ui,sans-serif;">' +
+        poi.label[lang] +
+        '</span>'
+      );
+  });
 </script>

@@ -10,7 +10,8 @@ yarn-error.log*
 
 .vscode/*
 
-*.pages
+# Docs and plans
+/docs_and_plans/
 
 # Build output
 /dist/

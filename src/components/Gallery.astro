@@ -60,34 +60,24 @@ const hasImages = images.length > 0;
   </div>
 </section>
 
-{hasImages && (
-  <Fragment>
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" /></noscript>
-    <script is:inline>
-      function initSwiper() {
-        new Swiper('.gallery-swiper', {
-          loop: true,
-          slidesPerView: 1.35,
-          spaceBetween: 10,
-          centeredSlides: true,
-          watchSlidesProgress: true,
-          autoplay: { delay: 6000, disableOnInteraction: false, pauseOnMouseEnter: true },
-          pagination: { el: '.gallery-pagination', clickable: true },
-          navigation: { nextEl: '.gallery-btn-next', prevEl: '.gallery-btn-prev' },
-          keyboard: { enabled: true },
-        });
-      }
-
-      var swiperScript = document.createElement('script');
-      swiperScript.src = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js';
-      swiperScript.onload = initSwiper;
-      document.head.appendChild(swiperScript);
-    </script>
-  </Fragment>
-)}
-
 <script>
+  import Swiper from 'swiper/bundle';
+  import 'swiper/css/bundle';
+
+  if (document.querySelector('.gallery-swiper')) {
+    new Swiper('.gallery-swiper', {
+      loop: true,
+      slidesPerView: 1.35,
+      spaceBetween: 10,
+      centeredSlides: true,
+      watchSlidesProgress: true,
+      autoplay: { delay: 6000, disableOnInteraction: false, pauseOnMouseEnter: true },
+      pagination: { el: '.gallery-pagination', clickable: true },
+      navigation: { nextEl: '.gallery-btn-next', prevEl: '.gallery-btn-prev' },
+      keyboard: { enabled: true },
+    });
+  }
+
   const wrapper = document.querySelector('.gallery-swiper .swiper-wrapper');
   if (wrapper) {
     wrapper.addEventListener('click', (e) => {
