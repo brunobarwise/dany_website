@@ -5,9 +5,16 @@ import ContactForm from '../../components/ContactForm.astro';
 import FAQ from '../../components/FAQ.astro';
 import Footer from '../../components/Footer.astro';
 import { useTranslations } from '../../i18n';
+import { paymentConditions, weeklyRates, tarifsLabels } from '../../data/tarifs';
 
 const lang = 'fr' as const;
 const t = useTranslations(lang);
+const labels = tarifsLabels[lang];
+
+const conditionItems = t('book.conditions_placeholder')
+  .split('\n')
+  .filter(l => l.trim())
+  .map(l => l.replace(/^[•]\s*/, ''));
 
 const platforms = [
   {
@@ -30,11 +37,11 @@ const platforms = [
   description="Réservez votre séjour à l'Étoile de la Mer au Cap d'Agde. Contact direct ou via Airbnb et Le Bon Coin."
 >
   <Nav lang={lang} currentUrl={Astro.url} />
-  <main class="pt-16">
-    <div class="bg-mer-dark text-white py-16 px-4">
-      <div class="max-w-6xl mx-auto">
+  <main class="pt-10">
+    <div class="bg-mer-dark text-white py-10 px-4">
+      <div class="max-w-6xl mx-auto text-center">
         <h1 class="font-display text-5xl font-bold mb-3">{t('book.title')}</h1>
-        <p class="text-white/65 max-w-xl leading-relaxed">{t('book.direct_intro')}</p>
+        <p class="text-white/65 max-w-xl mx-auto leading-relaxed">{t('book.direct_intro')}</p>
       </div>
     </div>
 
@@ -44,9 +51,57 @@ const platforms = [
         <div class="lg:col-span-2 space-y-12">
           <div>
             <h2 class="font-display text-2xl text-dusk mb-4">{t('book.conditions_title')}</h2>
-            <div class="bg-ecume rounded-2xl p-6 text-sm text-muted italic leading-relaxed">
-              {t('book.conditions_placeholder')}
+            <ul class="bg-ecume rounded-2xl p-6 text-sm text-muted leading-relaxed space-y-2">
+              {conditionItems.map(item => (
+                <li class="flex gap-2.5">
+                  <span class="text-sable shrink-0 mt-0.5">•</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="font-display text-2xl text-dusk mb-6">{t('book.tarifs_title')}</h2>
+
+            <p class="text-xs font-semibold text-dusk uppercase tracking-wide mb-2">{labels.paymentTitle}</p>
+            <ul class="bg-ecume rounded-2xl p-6 text-sm text-muted leading-relaxed space-y-2 mb-8">
+              {paymentConditions[lang].map(item => (
+                <li class="flex gap-2.5">
+                  <span class="text-sable shrink-0 mt-0.5">•</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div class="flex items-baseline justify-between mb-3">
+              <p class="text-xs font-semibold text-dusk uppercase tracking-wide">{labels.weeklyTitle}</p>
+              <p class="text-xs text-muted">{labels.availability}</p>
             </div>
+            <div class="overflow-hidden rounded-2xl border border-sable-dark/20">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="bg-mer-dark text-white text-xs uppercase tracking-wide">
+                    <th class="text-left px-5 py-3 font-semibold">{labels.colPeriod}</th>
+                    <th class="text-right px-5 py-3 font-semibold">{labels.colPrice}</th>
+                    <th class="text-left px-5 py-3 font-semibold hidden sm:table-cell">{labels.colNote}</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-sable-dark/10">
+                  {weeklyRates.map((r, i) => (
+                    <tr class={i % 2 === 0 ? 'bg-white' : 'bg-ecume'}>
+                      <td class="px-5 py-3 text-dusk font-medium">
+                        {r.period[lang]}
+                        {r.note && <p class="text-xs text-muted font-normal sm:hidden">{r.note[lang]}</p>}
+                      </td>
+                      <td class="px-5 py-3 text-right font-bold text-dusk whitespace-nowrap">{r.price} €</td>
+                      <td class="px-5 py-3 text-muted hidden sm:table-cell">{r.note?.[lang] ?? '—'}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p class="text-xs text-muted mt-3 italic">{labels.cta}</p>
           </div>
 
           <ContactForm lang={lang} />
