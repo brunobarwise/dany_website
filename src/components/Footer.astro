@@ -1,6 +1,7 @@
 ---
 import type { Lang } from '../i18n';
 import { useTranslations } from '../i18n';
+import ShareStrip from './ShareStrip.astro';
 
 interface Props {
   lang: Lang;
@@ -10,16 +11,21 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 ---
 <footer class="bg-mer-dark text-white/60 py-10 px-4">
-  <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
-    <div>
-      <span class="font-display font-semibold text-white text-lg">Étoile de la Mer</span>
-      <p class="text-xs mt-1">{t('footer.address')}</p>
+  <div class="max-w-6xl mx-auto space-y-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
+      <div>
+        <span class="font-display font-semibold text-white text-lg">Étoile de la Mer</span>
+        <p class="text-xs mt-1">{t('footer.address')}</p>
+      </div>
+      <div class="flex items-center gap-4 text-xs text-white/70">
+        <a href={lang === 'fr' ? '/fr/mentions-legales' : '/en/legal'} class="hover:text-white/70 transition-colors">
+          {t('footer.legal')}
+        </a>
+        <span>{t('footer.copyright')}</span>
+      </div>
     </div>
-    <div class="flex items-center gap-4 text-xs text-white/70">
-      <a href={lang === 'fr' ? '/fr/mentions-legales' : '/en/legal'} class="hover:text-white/70 transition-colors">
-        {t('footer.legal')}
-      </a>
-      <span>{t('footer.copyright')}</span>
+    <div class="border-t border-white/10 pt-5 flex justify-center">
+      <ShareStrip lang={lang} compact />
     </div>
   </div>
 </footer>

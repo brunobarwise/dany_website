@@ -7,6 +7,7 @@ import GalleryModal from '../../components/GalleryModal.astro';
 import Amenities from '../../components/Amenities.astro';
 import Map from '../../components/Map.astro';
 import Reviews from '../../components/Reviews.astro';
+import ShareStrip from '../../components/ShareStrip.astro';
 import SchemaLodging from '../../components/SchemaLodging.astro';
 import Footer from '../../components/Footer.astro';
 import { useTranslations } from '../../i18n';
@@ -29,6 +30,7 @@ const description = t('meta.home.description');
     <Amenities lang={lang} />
     <Map lang={lang} />
     <Reviews lang={lang} />
+    <ShareStrip lang={lang} />
   </main>
   <GalleryModal lang={lang} />
   <Footer lang={lang} />
