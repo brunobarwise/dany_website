@@ -13,7 +13,7 @@ export const paymentConditions: Record<Lang, string[]> = {
   ],
   en: [
     '40% deposit required at the time of booking via bank transfer, with the balance due 10 days before arrival.',
-    'A security deposit of €500 by cheque.',
+    'A refundable €500 security deposit (cash accepted).',
   ],
 };
 
