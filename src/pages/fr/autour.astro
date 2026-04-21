@@ -11,8 +11,8 @@ const t = useTranslations(lang);
 ---
 <Base
   lang={lang}
-  title="Aux alentours — Étoile de la Mer, Cap d'Agde"
-  description="Découvrez les activités et sites à visiter autour de notre appartement au Cap d'Agde : plages, villages, nature et escapades régionales."
+  title={t('meta.around.title')}
+  description={t('meta.around.description')}
 >
   <Nav lang={lang} currentUrl={Astro.url} />
   <main class="pt-10">
