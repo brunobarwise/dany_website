@@ -23,7 +23,7 @@ const hasImages = images.length > 0;
             {images.map((img, i) => (
               <div class="swiper-slide gallery-slide cursor-pointer" data-index={i} data-section={img.section}>
                 <div class="rounded-2xl overflow-hidden shadow-xl">
-                  <img src={img.src} alt={img.alt} class="w-full h-[30vh] sm:h-[52vh] lg:h-[60vh] object-cover" loading="lazy" />
+                  <img src={img.src} alt={lang === 'fr' ? img.alt : img.altEn} class="w-full h-[30vh] sm:h-[52vh] lg:h-[60vh] object-cover" loading="lazy" />
                 </div>
               </div>
             ))}

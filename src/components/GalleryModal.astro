@@ -1,5 +1,6 @@
 ---
 import type { Lang } from '../i18n';
+import type { GalleryImage } from '../data/gallery';
 import { images, sections } from '../data/gallery';
 
 interface Props {
@@ -7,6 +8,7 @@ interface Props {
 }
 
 const { lang } = Astro.props;
+const alt = (img: GalleryImage) => lang === 'fr' ? img.alt : img.altEn;
 
 const GRID_SECTIONS = ['sejour', 'cuisine-entree', 'loggia', 'chambre', 'cuisine', 'residence', 'commerces'];
 const FULL_SECTIONS  = ['port', 'plages'];
@@ -59,16 +61,17 @@ const fullSections = grouped.filter(s => FULL_SECTIONS.includes(s.key));
           <div
             class="group relative aspect-[4/3] overflow-hidden cursor-zoom-in"
             data-lightbox-index={section.images[0].index}
+            data-alt={alt(section.images[0])}
           >
             <img
               src={section.images[0].src}
-              alt={section.images[0].alt}
+              alt={alt(section.images[0])}
               class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               loading="lazy"
             />
             <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-end">
               <p class="w-full px-3 py-2 text-white text-xs translate-y-2 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                {section.images[0].alt}
+                {alt(section.images[0])}
               </p>
             </div>
           </div>
@@ -85,16 +88,17 @@ const fullSections = grouped.filter(s => FULL_SECTIONS.includes(s.key));
             <div
               class="group relative aspect-[4/3] overflow-hidden cursor-zoom-in"
               data-lightbox-index={img.index}
+              data-alt={alt(img)}
             >
               <img
                 src={img.src}
-                alt={img.alt}
+                alt={alt(img)}
                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 loading="lazy"
               />
               <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-end">
                 <p class="w-full px-3 py-2 text-white text-xs translate-y-2 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                  {img.alt}
+                  {alt(img)}
                 </p>
               </div>
             </div>
@@ -140,6 +144,11 @@ const fullSections = grouped.filter(s => FULL_SECTIONS.includes(s.key));
   const lightboxPrev = document.getElementById('lightbox-prev')!;
   const lightboxNext = document.getElementById('lightbox-next')!;
 
+  const alts: string[] = new Array(images.length).fill('');
+  document.querySelectorAll<HTMLElement>('[data-lightbox-index]').forEach(el => {
+    alts[Number(el.dataset.lightboxIndex)] = el.dataset.alt ?? '';
+  });
+
   let currentIndex = 0;
 
   function openModal(sectionKey?: string) {
@@ -164,8 +173,8 @@ const fullSections = grouped.filter(s => FULL_SECTIONS.includes(s.key));
     currentIndex = index;
     const img = images[currentIndex];
     lightboxImg.src = img.src;
-    lightboxImg.alt = img.alt;
-    lightboxCaption.textContent = img.alt;
+    lightboxImg.alt = alts[currentIndex];
+    lightboxCaption.textContent = alts[currentIndex];
     lightbox.classList.remove('hidden');
   }
 
@@ -177,8 +186,8 @@ const fullSections = grouped.filter(s => FULL_SECTIONS.includes(s.key));
     currentIndex = (currentIndex + dir + images.length) % images.length;
     const img = images[currentIndex];
     lightboxImg.src = img.src;
-    lightboxImg.alt = img.alt;
-    lightboxCaption.textContent = img.alt;
+    lightboxImg.alt = alts[currentIndex];
+    lightboxCaption.textContent = alts[currentIndex];
   }
 
   modal.addEventListener('click', (e) => {
