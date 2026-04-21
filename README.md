@@ -10,9 +10,7 @@ Static bilingual (FR/EN) rental website for a T2 apartment in Cap d'Agde.
 - **Swiper** — gallery (loaded via CDN, only active when images are present)
 - **@astrojs/sitemap** — wired in before first deploy (see `astro.config.mjs`
 
-
 ## Key files for content updates
-
 
 | What               | Where                                                         |
 | ------------------ | ------------------------------------------------------------- |
@@ -24,7 +22,6 @@ Static bilingual (FR/EN) rental website for a T2 apartment in Cap d'Agde.
 | Web3Forms key      | `ContactForm.astro` — `WEB3FORMS_KEY` constant               |
 
 ## Routes
-
 
 | URL            | Page                                           |
 | -------------- | ---------------------------------------------- |
