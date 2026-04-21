@@ -8,16 +8,8 @@ Static bilingual (FR/EN) rental website for a T2 apartment in Cap d'Agde.
 - **Tailwind v3** — custom "Golfe du Lion" palette
 - **Web3Forms** — contact form (no backend required)
 - **Swiper** — gallery (loaded via CDN, only active when images are present)
-- **@astrojs/sitemap** — wired in before first deploy (see `astro.config.mjs`)
+- **@astrojs/sitemap** — wired in before first deploy (see `astro.config.mjs`
 
-## Local development
-
-```bash
-npm install
-npm run dev       # http://localhost:4321
-npm run build     # output → dist/
-npm run preview   # preview the build locally
-```
 
 ## Key files for content updates
 
@@ -43,12 +35,3 @@ npm run preview   # preview the build locally
 | `/en`          | Home                                           |
 | `/en/around`   | Around us                                      |
 | `/en/book`     | Book your stay                                 |
-
-## Deployed
-
-- Domain: **OVH** - `location-etoiledelamer-capdagde.fr`
-  - DNS records point to Vercel
-  - simple forwarding email addresses:
-    - `dany@location-etoiledelamer-capdagde.fr`
-    - `contact@location-etoiledelamer-capdagde.fr`
-- Hosting: **Vercel** - connected to GitHub private repo
