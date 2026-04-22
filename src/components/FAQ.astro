@@ -13,75 +13,197 @@ type FaqItem = {
   a: { fr: string; en: string };
 };
 
-const faqs: FaqItem[] = [
+type FaqSection = {
+  label: { fr: string; en: string };
+  items: FaqItem[];
+};
+
+const sections: FaqSection[] = [
   {
-    q: {
-      fr: "Y a-t-il un parking ?",
-      en: "Is there parking?",
-    },
-    a: {
-      fr: "Oui, un parking privatif est inclus dans la location.",
-      en: "Yes, private parking is included with the rental.",
-    },
+    label: { fr: "L'appartement", en: 'The apartment' },
+    items: [
+      {
+        q: {
+          fr: "Quelle est la capacité de l'appartement ?",
+          en: "What is the maximum occupancy?",
+        },
+        a: {
+          fr: "L'appartement accueille jusqu'à 4 personnes : 1 chambre avec lits jumeaux et 1 cabine avec 2 lits superposés.",
+          en: "The apartment sleeps up to 4 guests: 1 bedroom with twin beds and 1 cabin with bunk beds.",
+        },
+      },
+      {
+        q: {
+          fr: "Y a-t-il un parking ?",
+          en: "Is there parking?",
+        },
+        a: {
+          fr: "Oui, un parking privatif est inclus dans la location.",
+          en: "Yes, private parking is included with the rental.",
+        },
+      },
+      {
+        q: {
+          fr: "Le linge de lit est-il fourni ?",
+          en: "Is bed linen provided?",
+        },
+        a: {
+          fr: "Le linge de lit est disponible en location. Il est offert pour les séjours d'une semaine ou plus.",
+          en: "Bed linen is available to rent and is provided free of charge for stays of 7 nights or more.",
+        },
+      },
+      {
+        q: {
+          fr: "Y a-t-il un lave-linge ?",
+          en: "Is there a washing machine?",
+        },
+        a: {
+          fr: "Oui, un lave-linge est disponible dans l'appartement.",
+          en: "Yes, a washing machine is available in the apartment.",
+        },
+      },
+      {
+        q: {
+          fr: "Y a-t-il des rangements ?",
+          en: "Is there any storage space?",
+        },
+        a: {
+          fr: "Oui, l'appartement a de nombreux rangements pour vos affaires personelles",
+          en: "Yes, the flat has plenty of storage space for your personal belongings",
+        },
+      },
+      {
+        q: {
+          fr: "Y a-t-il la climatisation ?",
+          en: "Is there air conditioning?",
+        },
+        a: {
+          fr: "Non, mais l'appartement est traversant plein sud et très bien ventilé naturellement.",
+          en: "No, but the apartment is south-facing throughout and naturally well-ventilated.",
+        },
+      },
+      {
+        q: {
+          fr: "Y a-t-il le WiFi ?",
+          en: "Is there WiFi?",
+        },
+        a: {
+          fr: "Non, il n'y a pas de WiFi fixe. En revanche, la réception 4G/5G est excellente dans l'appartement.",
+          en: "There is no fixed WiFi. However, 4G/5G reception is excellent throughout the apartment.",
+        },
+      },
+      {
+        q: {
+          fr: "Est-il possible de cuisiner sur place ?",
+          en: "Is it possible to cook on site?",
+        },
+        a: {
+          fr: "Oui, la cuisine est équipée et fonctionelle pour préparer vos repas. Vous y trouverez des plaques vitrocéramiques, un petit four, un barbecue électrique, un grille-pain, une cafetière Senseo et une bouilloire.",
+          en: "Yes, the kitchen is fully equipped and practical for preparing your meals. It features a ceramic hob, a small oven, an electric barbecue, a toaster, a Senseo coffee machine and a kettle.",
+        },
+      },
+      {
+        q: {
+          fr: "Les animaux de compagnie sont-ils acceptés ?",
+          en: "Are pets allowed?",
+        },
+        a: {
+          fr: "Non, les animaux de compagnie ne sont pas acceptés.",
+          en: "No, pets are not allowed.",
+        },
+      },
+    ],
   },
   {
-    q: {
-      fr: "Les plages sont-elles accessibles à pied ?",
-      en: "Are the beaches walkable?",
-    },
-    a: {
-      fr: "Oui. La plage de Richelieu est à 15 min à pied ou 5 min à vélo depuis l'appartement.",
-      en: "Yes. Richelieu beach is 15 minutes on foot or 5 minutes by bike from the apartment.",
-    },
+    label: { fr: 'Réservation', en: 'Booking' },
+    items: [
+      {
+        q: {
+          fr: "Comment vérifier les disponibilités ?",
+          en: "How can I check availability?",
+        },
+        a: {
+          fr: "Utilisez le formulaire de contact en indiquant vos dates d'arrivée et de départ — je vous répondrai rapidement.",
+          en: "Use the contact form with your intended arrival and departure dates — I'll get back to you promptly.",
+        },
+      },
+      {
+        q: {
+          fr: "Comment se passe la réservation ?",
+          en: "How does booking work?",
+        },
+        a: {
+          fr: "Un acompte de 40 % est demandé par virement bancaire à la réservation. Le solde est dû 10 jours avant l'arrivée. Un dépôt de garantie de 500 € en chèque ou en espèces est demandé à l'arrivée.",
+          en: "A 40% deposit is required by bank transfer at the time of booking. The balance is due 10 days before arrival. A €500 security deposit by cheque or cash is collected on arrival.",
+        },
+      },
+      {
+        q: {
+          fr: "Quelle est la durée minimale de séjour ?",
+          en: "What is the minimum stay?",
+        },
+        a: {
+          fr: "En haute saison (du 4 juillet au 22 août), la location est du samedi au samedi uniquement. En dehors de cette période, un séjour de 3 nuits minimum est possible.",
+          en: "During high season (4 July – 22 August), stays are Saturday to Saturday only. Outside this period, a minimum of 3 nights is possible.",
+        },
+      },
+      {
+        q: {
+          fr: "Les tarifs sont-ils négociables pour plusieurs semaines ?",
+          en: "Are rates negotiable for longer stays?",
+        },
+        a: {
+          fr: "Oui, le tarif est négociable pour une location de plusieurs semaines consécutives.",
+          en: "Yes, rates are negotiable for consecutive multi-week stays.",
+        },
+      },
+    ],
   },
   {
-    q: {
-      fr: "Quelle est la capacité de l'appartement ?",
-      en: "What is the maximum occupancy?",
-    },
-    a: {
-      fr: "L'appartement accueille jusqu'à 4 personnes : 1 chambre avec lits jumeaux et 1 cabine avec 2 lits superposés.",
-      en: "The apartment sleeps up to 4 guests: 1 bedroom with twin beds and 1 cabin with bunk beds.",
-    },
-  },
-  {
-    q: {
-      fr: "Y a-t-il le WiFi ?",
-      en: "Is there WiFi?",
-    },
-    a: {
-      fr: "Non, il n'y a pas de WiFi fixe. En revanche, la réception 4G/5G est excellente dans l'appartement.",
-      en: "There is no fixed WiFi. However, 4G/5G reception is excellent throughout the apartment.",
-    },
-  },
-  {
-    q: {
-      fr: "Y a-t-il la climatisation ?",
-      en: "Is there air conditioning?",
-    },
-    a: {
-      fr: "Non, mais l'appartement est traversant plein sud et très bien ventilé naturellement.",
-      en: "No, but the apartment is south-facing throughout and naturally well-ventilated.",
-    },
-  },
-  {
-    q: {
-      fr: "Les animaux de compagnie sont-ils acceptés ?",
-      en: "Are pets allowed?",
-    },
-    a: {
-      fr: "Non, les animaux de compagnie ne sont pas acceptés.",
-      en: "No, pets are not allowed.",
-    },
+    label: { fr: 'Repas & activités', en: 'Food & activities' },
+    items: [
+      {
+        q: {
+          fr: "Comment se restaurer sur place ?",
+          en: "What are the options for food?",
+        },
+        a: {
+          fr: "La cuisine est entièrement équipée pour préparer vos repas. Supermarchés, boulangerie, boucherie et traiteur sont à quelques minutes à pied. Le marché traditionnel se tient le samedi matin. Les nombreux restaurants et bars du port du Cap d'Agde sont à moins de 15 minutes à pied ou 5 minutes à vélo.",
+          en: "The kitchen is fully equipped for self-catering. Supermarkets, a bakery, butcher and deli are a short walk away. A traditional market runs on Saturday mornings. The many restaurants and bars at Cap d'Agde harbour are less than 15 minutes on foot or 5 minutes by bike.",
+        },
+      },
+      {
+        q: {
+          fr: "Les plages sont-elles accessibles à pied ?",
+          en: "Are the beaches walkable?",
+        },
+        a: {
+          fr: "Oui. La plage de Richelieu est à 15 min à pied ou 5 min à vélo depuis l'appartement.",
+          en: "Yes. Richelieu beach is 15 minutes on foot or 5 minutes by bike from the apartment.",
+        },
+      },
+      {
+        q: {
+          fr: "Quoi faire en dehors des plages ?",
+          en: "What is there to do beyond the beach?",
+        },
+        a: {
+          fr: "Le port du Cap d'Agde, le golf, le tennis, Luna Park, Aqualand, le Casino Barrière et le Fort de Brescou sont tous à moins de 15 minutes. Sète, Pézenas, le Lac du Salagou et les Gorges de l'Hérault sont à 25–50 minutes en voiture.",
+          en: "Cap d'Agde harbour, golf, tennis, Luna Park, Aqualand, the Casino Barrière and Fort de Brescou are all within 15 minutes. Sète, Pézenas, Lac du Salagou and the Hérault gorges are 25–50 minutes by car.",
+        },
+      },
+    ],
   },
 ];
+
+const allItems = sections.flatMap(s => s.items);
 
 const heading = lang === 'fr' ? 'Questions fréquentes' : 'Frequently asked questions';
 
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: faqs.map(f => ({
+  mainEntity: allItems.map(f => ({
     '@type': 'Question',
     name: f.q[lang],
     acceptedAnswer: {
@@ -94,20 +216,27 @@ const schema = {
 {inline ? (
   <div id="faq">
     <h2 class="font-display text-2xl text-dusk mb-4">{heading}</h2>
-    <div class="divide-y divide-sable/30">
-      {faqs.map(f => (
-        <details class="group py-4">
-          <summary class="flex items-center justify-between gap-4 cursor-pointer list-none text-dusk font-semibold text-base select-none">
-            {f.q[lang]}
-            <svg
-              class="w-5 h-5 shrink-0 text-mer transition-transform duration-200 group-open:rotate-180"
-              fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"
-            >
-              <polyline points="6 9 12 15 18 9" />
-            </svg>
-          </summary>
-          <p class="mt-3 text-muted text-sm leading-relaxed">{f.a[lang]}</p>
-        </details>
+    <div class="space-y-6">
+      {sections.map(section => (
+        <div>
+          <p class="text-xs font-semibold tracking-widest uppercase text-mer/60 mb-1">{section.label[lang]}</p>
+          <div class="divide-y divide-sable/30">
+            {section.items.map(f => (
+              <details class="group py-4">
+                <summary class="flex items-center justify-between gap-4 cursor-pointer list-none text-dusk font-semibold text-base select-none">
+                  {f.q[lang]}
+                  <svg
+                    class="w-5 h-5 shrink-0 text-mer transition-transform duration-200 group-open:rotate-180"
+                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"
+                  >
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                </summary>
+                <p class="mt-3 text-muted text-sm leading-relaxed">{f.a[lang]}</p>
+              </details>
+            ))}
+          </div>
+        </div>
       ))}
     </div>
   </div>
@@ -115,20 +244,27 @@ const schema = {
   <section id="faq" class="py-10 bg-white">
     <div class="max-w-3xl mx-auto px-4 sm:px-6">
       <h2 class="font-display text-4xl text-center text-dusk mb-10">{heading}</h2>
-      <div class="divide-y divide-sable/30">
-        {faqs.map(f => (
-          <details class="group py-5">
-            <summary class="flex items-center justify-between gap-4 cursor-pointer list-none text-dusk font-semibold text-base select-none">
-              {f.q[lang]}
-              <svg
-                class="w-5 h-5 shrink-0 text-mer transition-transform duration-200 group-open:rotate-180"
-                fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"
-              >
-                <polyline points="6 9 12 15 18 9" />
-              </svg>
-            </summary>
-            <p class="mt-3 text-muted text-sm leading-relaxed">{f.a[lang]}</p>
-          </details>
+      <div class="space-y-10">
+        {sections.map(section => (
+          <div>
+            <p class="text-xs font-semibold tracking-widest uppercase text-mer/60 mb-1">{section.label[lang]}</p>
+            <div class="divide-y divide-sable/30">
+              {section.items.map(f => (
+                <details class="group py-5">
+                  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none text-dusk font-semibold text-base select-none">
+                    {f.q[lang]}
+                    <svg
+                      class="w-5 h-5 shrink-0 text-mer transition-transform duration-200 group-open:rotate-180"
+                      fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"
+                    >
+                      <polyline points="6 9 12 15 18 9" />
+                    </svg>
+                  </summary>
+                  <p class="mt-3 text-muted text-sm leading-relaxed">{f.a[lang]}</p>
+                </details>
+              ))}
+            </div>
+          </div>
         ))}
       </div>
     </div>

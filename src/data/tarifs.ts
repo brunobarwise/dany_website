@@ -9,7 +9,7 @@ export interface Rate {
 export const paymentConditions: Record<Lang, string[]> = {
   fr: [
     "40% d'arrhes à la réservation par virement et complément 10 jours avant l'arrivée.",
-    "Un dépôt de garantie d'un montant de 500 € en chèque.",
+    "Un dépôt de garantie d'un montant de 500 € en chèque ou espèces.",
   ],
   en: [
     '40% deposit required at the time of booking via bank transfer, with the balance due 10 days before arrival.',
