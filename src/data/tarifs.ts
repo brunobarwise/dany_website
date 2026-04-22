@@ -10,10 +10,12 @@ export const paymentConditions: Record<Lang, string[]> = {
   fr: [
     "40% d'arrhes à la réservation par virement et complément 10 jours avant l'arrivée.",
     "Un dépôt de garantie d'un montant de 500 € en chèque ou espèces.",
+    "Caution supplémentaire de 50 € pour le ménage, rendu pour un état de propreté normal à la restitution de la location."
   ],
   en: [
     '40% deposit required at the time of booking via bank transfer, with the balance due 10 days before arrival.',
     'A refundable €500 security deposit (cash accepted).',
+    'An additional €50 cleaning deposit, refunded provided the property is left in a normal state of cleanliness.'
   ],
 };
 
