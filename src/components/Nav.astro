@@ -12,12 +12,12 @@ const t = useTranslations(lang);
 const alternate = getAlternateUrl(currentUrl);
 const altLabel = lang === 'fr' ? 'EN 🇬🇧' : 'FR 🇫🇷';
 
-const homeHref = `/${lang}`;
-const aroundHref = lang === 'fr' ? '/fr/autour' : '/en/around';
-const bookHref = lang === 'fr' ? '/fr/reserver' : '/en/book';
+const homeHref = `/${lang}/`;
+const aroundHref = lang === 'fr' ? '/fr/autour/' : '/en/around/';
+const bookHref = lang === 'fr' ? '/fr/reserver/' : '/en/book/';
 
-const path = currentUrl.pathname.replace(/\/$/, '');
-const isActive = (href: string) => path === href;
+const normalize = (p: string) => p.endsWith('/') ? p : `${p}/`;
+const isActive = (href: string) => normalize(currentUrl.pathname) === href;
 ---
 <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-sable/30 shadow-sm">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
