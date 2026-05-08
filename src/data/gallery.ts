@@ -28,6 +28,7 @@ export const images: GalleryImage[] = [
   { src: '/images/gallery/02.webp', alt: 'Cuisine ouverte sur le séjour',                                               altEn: 'Open-plan kitchen and living room',                                section: 'cuisine-entree' },
   { src: '/images/gallery/03.webp', alt: 'Loggia avec table de petit-déjeuner, vue sur le jardin',                      altEn: 'Loggia breakfast table with garden view',                          section: 'loggia'         },
   { src: '/images/gallery/04.webp', alt: 'Chambre double au nord avec fenêtre, dans résidence au calme',                altEn: 'Quiet north-facing double bedroom with window',                    section: 'chambre'        },
+  { src: '/images/gallery/16.webp', alt: 'Chambre cabine avec deux lits superposés',                                    altEn: 'Cabin bedroom with two bunk beds',                                 section: 'chambre'        },
   { src: '/images/gallery/05.webp', alt: 'Cuisine et Salle d\'eau fonctionnelles',                                      altEn: 'Fully equipped and functionnal kitchen and bathroom',              section: 'cuisine'        },
   { src: '/images/gallery/06.webp', alt: 'La résidence entourée de verdure, avec parking privé et sécurisé',            altEn: 'The residence surrounded by gardens, with private parking',        section: 'residence'      },
   { src: '/images/gallery/07.webp', alt: 'Le port de plaisance du Cap d\'Agde et ses nombreux restaurants et cafés',    altEn: 'Cap d\'Agde marina and its sailing boats',                         section: 'port'           },
@@ -39,5 +40,4 @@ export const images: GalleryImage[] = [
   { src: '/images/gallery/13.webp', alt: 'Pêche en famille et cerfs-volants au bord de l\'eau',                         altEn: 'Family fishing and giant kite at the waterside',                   section: 'plages'         },
   { src: '/images/gallery/14.webp', alt: 'Arc-en-ciel sur la mer turquoise et la digue',                                altEn: 'Rainbow over the turquoise sea and stone breakwater',              section: 'plages'         },
   { src: '/images/gallery/15.webp', alt: 'Palmiers en silhouette sur la grande plage au coucher du soleil',             altEn: 'Palm trees silhouetted against the sunset on the main beach',      section: 'plages'         },
-  { src: '/images/gallery/16.webp', alt: 'Chambre cabine avec deux lits superposés',                                    altEn: 'Cabin bedroom with two bunk beds',                                 section: 'chambre'        },
 ];
