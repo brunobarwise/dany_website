@@ -39,4 +39,5 @@ export const images: GalleryImage[] = [
   { src: '/images/gallery/13.webp', alt: 'Pêche en famille et cerfs-volants au bord de l\'eau',                         altEn: 'Family fishing and giant kite at the waterside',                   section: 'plages'         },
   { src: '/images/gallery/14.webp', alt: 'Arc-en-ciel sur la mer turquoise et la digue',                                altEn: 'Rainbow over the turquoise sea and stone breakwater',              section: 'plages'         },
   { src: '/images/gallery/15.webp', alt: 'Palmiers en silhouette sur la grande plage au coucher du soleil',             altEn: 'Palm trees silhouetted against the sunset on the main beach',      section: 'plages'         },
+  { src: '/images/gallery/16.webp', alt: 'Chambre cabine avec deux lits superposés',                                    altEn: 'Cabin bedroom with two bunk beds',                                 section: 'chambre'        },
 ];
