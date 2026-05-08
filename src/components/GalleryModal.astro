@@ -10,7 +10,7 @@ interface Props {
 const { lang } = Astro.props;
 const alt = (img: GalleryImage) => lang === 'fr' ? img.alt : img.altEn;
 
-const GRID_SECTIONS = ['sejour', 'cuisine-entree', 'loggia', 'chambre', 'cuisine', 'residence', 'commerces'];
+const GRID_SECTIONS = ['sejour', 'cuisine-entree', 'loggia', 'chambre-double', 'chambre-cabine', 'cuisine', 'residence', 'commerces'];
 const FULL_SECTIONS  = ['port', 'plages'];
 
 const grouped = sections
